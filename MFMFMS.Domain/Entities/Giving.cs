@@ -43,12 +43,24 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateAmount(decimal amount)
+        {
+            ValidateAmount(amount);
+            Amount = amount;
+        }
+
         private static void ValidateDate(DateTime date)
         {
             if (date == DateTime.MinValue)
             {
                 throw new BusinessRuleException("Date is required.");
             }
+        }
+
+        public void UpdateDate(DateTime date)
+        {
+            ValidateDate(date);
+            Date = date;
         }
 
         private static void ValidateSummary(string summary)
@@ -59,12 +71,24 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateSummary(string summary)
+        {
+            ValidateSummary(summary);
+            Summary = summary.Trim();
+        }
+
         private static void ValidateCategoryId(Guid categoryId)
         {
             if (categoryId == Guid.Empty)
             {
                 throw new BusinessRuleException("CategoryId is required.");
             }
+        }
+
+        public void UpdateCategoryId(Guid categoryId)
+        {
+            ValidateCategoryId(categoryId);
+            CategoryId = categoryId;
         }
     }
 }
