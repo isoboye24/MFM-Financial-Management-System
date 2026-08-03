@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MFMFMS.Application\MFMFMS.Application.csproj" />
+    <ProjectReference Include="..\MFMFMS.Domain\MFMFMS.Domain.csproj" />
+    <ProjectReference Include="..\MFMFMS.Infrastructure\MFMFMS.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
