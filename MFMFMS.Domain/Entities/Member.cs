@@ -26,7 +26,7 @@ namespace MFMFMS.Domain.Entities
 
         private Member()
         {
-            
+
         }
 
         private static void ValidateAll(string firstName, string lastName, string address, string phoneNumber, Guid positionId)
@@ -45,7 +45,13 @@ namespace MFMFMS.Domain.Entities
                 throw new BusinessRuleException("First Name is required.");
             }
         }
-        
+
+        public void UpdateFirstName(string firstName)
+        {
+            ValidateFirstName(firstName);
+            FirstName = firstName.Trim();
+        }
+
         private static void ValidateLastName(string lastName)
         {
             if (string.IsNullOrWhiteSpace(lastName))
@@ -53,7 +59,13 @@ namespace MFMFMS.Domain.Entities
                 throw new BusinessRuleException("Last Name is required.");
             }
         }
-        
+
+        public void UpdateLastName(string lastName)
+        {
+            ValidateLastName(lastName);
+            LastName = lastName.Trim();
+        }
+
         private static void ValidateAddress(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
@@ -61,7 +73,13 @@ namespace MFMFMS.Domain.Entities
                 throw new BusinessRuleException("Address is required.");
             }
         }
-        
+
+        public void UpdateAddress(string address)
+        {
+            ValidateAddress(address);
+            Address = address.Trim();
+        }
+
         private static void ValidatePhoneNumber(string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber))
@@ -70,12 +88,24 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdatePhoneNumber(string phoneNumber)
+        {
+            ValidatePhoneNumber(phoneNumber);
+            PhoneNumber = phoneNumber.Trim();
+        }
+
         private static void ValidatePositionId(Guid positionId)
         {
             if (positionId == Guid.Empty)
             {
                 throw new BusinessRuleException("Position is required.");
             }
+        }
+
+        public void UpdatePositionId(Guid positionId)
+        {
+            ValidatePositionId(positionId);
+            PositionId = positionId;
         }
     }
 }

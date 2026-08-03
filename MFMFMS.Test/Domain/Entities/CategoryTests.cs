@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MFMFMS.Domain.Entities;
+﻿using MFMFMS.Domain.Entities;
 using MFMFMS.Domain.Exceptions;
 
 namespace MFMFMS.Test.Domain.Entities
