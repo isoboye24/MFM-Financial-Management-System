@@ -1,4 +1,6 @@
-﻿namespace MFMFMS.Domain.Entities
+﻿using MFMFMS.Domain.Exceptions;
+
+namespace MFMFMS.Domain.Entities
 {
     public class Giving
     {
@@ -8,5 +10,61 @@
         public string Summary { get; private set; } = string.Empty;
         public Guid CategoryId { get; private set; }
         public Category? Category { get; private set; }
+
+        public Giving(decimal amount, DateTime date, string summary, Guid categoryId)
+        {
+            ValidateAll(amount, date, summary, categoryId);
+
+            Amount = amount;
+            Date = date;
+            Summary = summary.Trim();
+            CategoryId = categoryId;
+            Id = Guid.CreateVersion7();
+        }
+
+        private Giving()
+        {
+            
+        }
+
+        private static void ValidateAll(decimal amount, DateTime date, string summary, Guid categoryId)
+        {
+            ValidateAmount(amount);
+            ValidateDate(date);
+            ValidateSummary(summary);
+            ValidateCategoryId(categoryId);
+        }
+
+        private static void ValidateAmount(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new BusinessRuleException("Amount must be greater than zero.");
+            }
+        }
+
+        private static void ValidateDate(DateTime date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                throw new BusinessRuleException("Date is required.");
+            }
+        }
+
+        private static void ValidateSummary(string summary)
+        {
+            if (string.IsNullOrWhiteSpace(summary))
+            {
+                throw new BusinessRuleException("Summary is required.");
+            }
+        }
+
+        private static void ValidateCategoryId(Guid categoryId)
+        {
+            if (categoryId == Guid.Empty)
+            {
+                throw new BusinessRuleException("CategoryId is required.");
+            }
+        }
     }
 }
