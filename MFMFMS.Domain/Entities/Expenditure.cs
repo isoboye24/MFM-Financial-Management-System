@@ -15,7 +15,7 @@ namespace MFMFMS.Domain.Entities
 
             Amount = amount;
             Date = date;
-            Summary = summary;
+            Summary = summary.Trim();
             Id = Guid.CreateVersion7();
         }
 
@@ -39,6 +39,12 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateSummary(string summary)
+        {
+            ValidateSummary(summary);
+            Summary = summary.Trim();
+        }
+
         private static void ValidateAmount(decimal amount)
         {
             if (amount <= 0)
@@ -47,12 +53,24 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateAmount(decimal amount)
+        {
+            ValidateAmount(amount);
+            Amount = amount;
+        }
+
         private static void ValidateDate(DateTime date)
         {
             if (date == DateTime.MinValue)
             {
                 throw new BusinessRuleException("Date is required.");
             }
+        }
+
+        public void UpdateDate(DateTime date)
+        {
+            ValidateDate(date);
+            Date = date;
         }
     }
 }
