@@ -48,6 +48,12 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateDate(DateTime date)
+        {
+            ValidateDate(date);
+            Date = date;
+        }
+
         private static void ValidateSummary(string summary)
         {
             if (string.IsNullOrWhiteSpace(summary))
@@ -55,13 +61,25 @@ namespace MFMFMS.Domain.Entities
                 throw new BusinessRuleException("Summary is required.");
             }
         }
-        
+
+        public void UpdateSummary(string summary)
+        {
+            ValidateSummary(summary);
+            Summary = summary.Trim();
+        }
+
         private static void ValidateMessageTitle(string messageTitle)
         {
             if (string.IsNullOrWhiteSpace(messageTitle))
             {
                 throw new BusinessRuleException("Message Title is required.");
             }
+        }
+
+        public void UpdateMessageTitle(string messageTitle)
+        {
+            ValidateMessageTitle(messageTitle);
+            MessageTitle = messageTitle.Trim();
         }
 
         private static void ValidateMinister(string minister)
@@ -72,12 +90,27 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateMinister(string minister)
+        {
+            ValidateMinister(minister);
+            Minister = minister.Trim();
+        }
+
         private static void ValidateAttendance(int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
         {
             if (noOfMaleAttendance < 0 || noOfFemaleAttendance < 0 || noOfChildrenAttendance < 0)
             {
                 throw new BusinessRuleException("Attendance numbers cannot be negative.");
             }
+        }
+
+        public void UpdateAttendance(int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
+        {
+            ValidateAttendance(noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance);
+
+            NoOfMaleAttendance = noOfMaleAttendance;
+            NoOfFemaleAttendance = noOfFemaleAttendance;
+            NoOfChildrenAttendance = noOfChildrenAttendance;
         }
     }
 }
