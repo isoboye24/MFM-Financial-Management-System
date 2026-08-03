@@ -35,6 +35,12 @@ namespace MFMFMS.Domain.Entities
             DocumentType = documentType;
         }
 
+        public void UpdateName(string name)
+        {
+            ValidateName(name);
+            Name = name.Trim();
+        }
+
         private static void ValidateAll(string name, string blobName, DocumentType documentType)
         {
             ValidateName(name);
@@ -52,7 +58,7 @@ namespace MFMFMS.Domain.Entities
             if (name.Length > 200)
             {
                 throw new BusinessRuleException("Document name cannot exceed 200 characters.");
-            }                
+            }
         }
 
         private static void ValidateBlobName(string blobName)
@@ -63,12 +69,24 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateBlobName(string blobName)
+        {
+            ValidateBlobName(blobName);
+            BlobName = blobName.Trim();
+        }
+
         private static void ValidateDocumentType(DocumentType documentType)
         {
             if (!Enum.IsDefined(documentType))
             {
                 throw new BusinessRuleException("Document type is invalid.");
             }
+        }
+
+        public void UpdateDocumentType(DocumentType documentType)
+        {
+            ValidateDocumentType(documentType);
+            DocumentType = documentType;
         }
     }
 }
