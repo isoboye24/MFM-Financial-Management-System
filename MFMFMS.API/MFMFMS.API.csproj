@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MFMFMS.Application\MFMFMS.Application.csproj" />
+    <ProjectReference Include="..\MFMFMS.Infrastructure\MFMFMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\MFMFMS.Persistence\MFMFMS.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,23 @@
+using DotNetEnv;
+using MFMFMS.Application;
+using MFMFMS.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
+
+Env.TraversePath().Load();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Configuration.AddEnvironmentVariables();
+builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddApplicationServices();
+builder.Services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
