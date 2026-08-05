@@ -16,7 +16,7 @@ namespace MFMFMS.Persistence.Repositories
 
         public async Task<IEnumerable<Category>> GetFiltered(CategoriesFilterDTO filter)
         {
-            var query = _db.Categories.AsQueryable();
+            var query = _db.Categories.Where(x => !x.IsDeleted);
 
             if (!string.IsNullOrWhiteSpace(filter.Name))
             {

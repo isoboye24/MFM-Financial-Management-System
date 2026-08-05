@@ -5,7 +5,7 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "name": "Offering"
+  "name": "Project"
 }
 
 ### Get All
@@ -26,5 +26,9 @@ Content-type: application/json
 {
   "name": "Seed"
 }
+
+### Temporarily Delete by Id
+
+DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310
 
 ###

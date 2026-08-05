@@ -35,12 +35,24 @@ namespace MFMFMS.Persistence.Repositories
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await _db.Set<T>().ToListAsync();
+            return await _db.Set<T>()
+                        .Where(x => !x.IsDeleted)
+                        .ToListAsync();
         }
 
-        public Task<T?> GetBack(Guid id)
+        public async Task<IEnumerable<T>> GetAllDeleted()
         {
-            throw new NotImplementedException();
+            return await _db.Set<T>()
+                        .IgnoreQueryFilters()
+                        .Where(x => x.IsDeleted)
+                        .ToListAsync();
+        }
+
+        public async Task<T?> GetBack(Guid id)
+        {
+            return await _db.Set<T>()
+                        .IgnoreQueryFilters()
+                        .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
         }
 
         public async Task<T?> GetById(Guid id)

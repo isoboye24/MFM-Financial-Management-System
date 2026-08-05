@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Categories;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Categories.Commands.CreateCategories;
+using MFMFMS.Application.Features.Categories.Commands.DeleteCategory;
 using MFMFMS.Application.Features.Categories.Commands.UpdateCategory;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryDetail;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
@@ -18,7 +19,6 @@ namespace MFMFMS.API.Controllers
         {
             _mediator = mediator;
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryDTO createCategoryDTO)
@@ -57,6 +57,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteCategoryCommand { Id = id });
             return NoContent();
         }
     }
