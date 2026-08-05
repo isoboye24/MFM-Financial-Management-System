@@ -5,7 +5,7 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "name": "Tithe"
+  "name": "Offering"
 }
 
 ### Get All
@@ -18,5 +18,13 @@ Accept: application/json
 
 GET {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
 ACCEPT: application/json
+
+### Update by Id
+
+PUT {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+Content-type: application/json
+{
+  "name": "Seed"
+}
 
 ###

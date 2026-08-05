@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Categories;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Categories.Commands.CreateCategories;
+using MFMFMS.Application.Features.Categories.Commands.UpdateCategory;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryDetail;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Utilities;
@@ -44,6 +45,19 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetCategoryDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateCategoryDTO updateCategoryDTO)
+        {
+            var command = new UpdateCategoryCommand
+            {
+                Id = id,
+                Name = updateCategoryDTO.Name,
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }
