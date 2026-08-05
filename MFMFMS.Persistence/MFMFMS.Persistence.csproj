@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MFMFMS.Application\MFMFMS.Application.csproj" />
-    <ProjectReference Include="..\MFMFMS.Domain\MFMFMS.Domain.csproj" />
   </ItemGroup>
 
 </Project>
