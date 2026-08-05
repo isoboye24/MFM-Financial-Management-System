@@ -1,5 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Categories;
+using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Categories.Commands.CreateCategories;
+using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +27,14 @@ namespace MFMFMS.API.Controllers
             };
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<CategoryListsDTO>>> GetAll([FromQuery] GetCategoryListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }

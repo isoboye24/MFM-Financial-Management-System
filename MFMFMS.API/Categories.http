@@ -7,3 +7,8 @@ Content-type: application/json
 }
 
 ###
+
+GET {{Host}}
+Accept: application/json
+
+###
