@@ -10,15 +10,18 @@ namespace MFMFMS.Domain.Entities
         public string Summary { get; private set; } = string.Empty;
         public Guid CategoryId { get; private set; }
         public Category? Category { get; private set; }
+        public Guid MeetingId { get; private set; }
+        public Meeting? Meeting { get; private set; }
 
-        public Giving(decimal amount, DateTime date, string summary, Guid categoryId)
+        public Giving(decimal amount, DateTime date, string summary, Guid categoryId, Guid meetingId)
         {
-            ValidateAll(amount, date, summary, categoryId);
+            ValidateAll(amount, date, summary, categoryId, meetingId);
 
             Amount = amount;
             Date = date;
             Summary = summary.Trim();
             CategoryId = categoryId;
+            MeetingId = meetingId;
             Id = Guid.CreateVersion7();
         }
 
@@ -27,12 +30,13 @@ namespace MFMFMS.Domain.Entities
             
         }
 
-        private static void ValidateAll(decimal amount, DateTime date, string summary, Guid categoryId)
+        private static void ValidateAll(decimal amount, DateTime date, string summary, Guid categoryId, Guid meetingId)
         {
             ValidateAmount(amount);
             ValidateDate(date);
             ValidateSummary(summary);
             ValidateCategoryId(categoryId);
+            ValidateMeetingId(meetingId);
         }
 
         private static void ValidateAmount(decimal amount)
@@ -89,6 +93,20 @@ namespace MFMFMS.Domain.Entities
         {
             ValidateCategoryId(categoryId);
             CategoryId = categoryId;
+        }
+
+        private static void ValidateMeetingId(Guid meetingId)
+        {
+            if (meetingId == Guid.Empty)
+            {
+                throw new BusinessRuleException("MeetingId is required.");
+            }
+        }
+
+        public void UpdateMeetingId(Guid meetingId)
+        {
+            ValidateMeetingId(meetingId);
+            MeetingId = meetingId;
         }
     }
 }
