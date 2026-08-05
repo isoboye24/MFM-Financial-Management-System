@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Categories;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Categories.Commands.CreateCategories;
+using MFMFMS.Application.Features.Categories.Queries.GetCategoryDetail;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,14 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CategoryDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetCategoryDetailQuery { Id = id };
+            return await _mediator.Send(query);
         }
     }
 }

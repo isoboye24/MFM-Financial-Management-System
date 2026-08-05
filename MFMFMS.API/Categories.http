@@ -1,14 +1,22 @@
 @Host = http://localhost:5209/api/categories
 
+### Insert
+
 Post {{Host}}
 Content-type: application/json
 {
   "name": "Tithe"
 }
 
-###
+### Get All
 
 GET {{Host}}
 Accept: application/json
+
+
+### Search by Id
+
+GET {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+ACCEPT: application/json
 
 ###
