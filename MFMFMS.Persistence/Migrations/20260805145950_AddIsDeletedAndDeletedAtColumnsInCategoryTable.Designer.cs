@@ -4,6 +4,7 @@ using MFMFMS.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MFMFMS.Persistence.Migrations
 {
     [DbContext(typeof(MFMFMSDBContext))]
-    partial class MFMFMSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260805145950_AddIsDeletedAndDeletedAtColumnsInCategoryTable")]
+    partial class AddIsDeletedAndDeletedAtColumnsInCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

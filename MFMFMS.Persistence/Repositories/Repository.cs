@@ -1,8 +1,9 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
+using MFMFMS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 namespace MFMFMS.Persistence.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class, ISoftDeletable
+    public class Repository<T> : IRepository<T> where T : SoftDeletableEntity
     {
         private readonly MFMFMSDBContext _db;
 
@@ -45,16 +46,6 @@ namespace MFMFMS.Persistence.Repositories
         public async Task<T?> GetById(Guid id)
         {
             return await _db.Set<T>().FindAsync(id);
-        }
-
-        public Task<IEnumerable<T>> GetByMonth(int month)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<T>> GetByYear(int year)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<int> GetTotalAmountOfRecords()

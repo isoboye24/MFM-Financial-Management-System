@@ -1,4 +1,4 @@
-﻿namespace MFMFMS.Application.Contracts.Repositories
+﻿namespace MFMFMS.Domain.Common
 {
     public interface ISoftDeletable
     {

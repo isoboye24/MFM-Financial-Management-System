@@ -2,9 +2,8 @@
 
 namespace MFMFMS.Domain.Entities
 {
-    public class Member
+    public class Member : SoftDeletableEntity
     {
-        public Guid Id { get; private set; }
         public string FirstName { get; private set; } = string.Empty;
         public string LastName { get; private set; } = string.Empty;
         public string Address { get; private set; } = string.Empty;

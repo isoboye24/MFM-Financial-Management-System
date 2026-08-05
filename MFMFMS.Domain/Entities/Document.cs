@@ -3,9 +3,8 @@ using MFMFMS.Domain.Exceptions;
 
 namespace MFMFMS.Domain.Entities
 {
-    public class Document
+    public class Document : SoftDeletableEntity
     {
-        public Guid Id { get; private set; }
         public string Name { get; private set; } = string.Empty;
         public string BlobName { get; private set; } = string.Empty;
         public DocumentType DocumentType { get; private set; }
