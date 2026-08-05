@@ -43,7 +43,6 @@ namespace MFMFMS.Persistence.Repositories
         public async Task<IEnumerable<T>> GetAllDeleted()
         {
             return await _db.Set<T>()
-                        .IgnoreQueryFilters()
                         .Where(x => x.IsDeleted)
                         .ToListAsync();
         }
