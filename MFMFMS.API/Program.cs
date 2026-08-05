@@ -1,4 +1,5 @@
 using DotNetEnv;
+using MFMFMS.API.Middleware;
 using MFMFMS.Application;
 using MFMFMS.Persistence;
 
@@ -26,6 +27,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCustomExceptionHandler();
 
 app.UseHttpsRedirection();
 

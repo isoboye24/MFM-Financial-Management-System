@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Categories\Commands\" />
     <Folder Include="Features\Categories\Queries\GetCategoryDetail\" />
     <Folder Include="Notifications\" />
   </ItemGroup>

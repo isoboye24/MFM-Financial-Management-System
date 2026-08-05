@@ -1,0 +1,9 @@
+@Host = http://localhost:5209/api/categories
+
+Post {{Host}}
+Content-type: application/json
+{
+  "name": "Tithe"
+}
+
+###
