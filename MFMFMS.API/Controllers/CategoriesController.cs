@@ -2,6 +2,8 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Categories.Commands.CreateCategories;
 using MFMFMS.Application.Features.Categories.Commands.DeleteCategory;
+using MFMFMS.Application.Features.Categories.Commands.PermanentDeleteCategory;
+using MFMFMS.Application.Features.Categories.Commands.RestoreCategory;
 using MFMFMS.Application.Features.Categories.Commands.UpdateCategory;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryDetail;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
@@ -40,14 +42,6 @@ namespace MFMFMS.API.Controllers
             return result.Items;
         }
 
-        [HttpGet("deleted")]
-        public async Task<ActionResult<List<DeletedCategoryListsDTO>>> GetDeleted([FromQuery] GetDeletedCategoryListsQuery query)
-        {
-            var result = await _mediator.Send(query);
-            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
-            return result.Items;
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDetailDTO>> GetById(Guid id)
         {
@@ -72,6 +66,32 @@ namespace MFMFMS.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await _mediator.Send(new DeleteCategoryCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedCategoryListsDTO>>> GetDeleted([FromQuery] GetDeletedCategoryListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreCategoryCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteCategoryCommand { Id = id });
             return NoContent();
         }
     }

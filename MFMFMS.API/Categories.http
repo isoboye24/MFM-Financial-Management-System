@@ -36,4 +36,10 @@ Content-type: application/json
 
 DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310
 
-###
+### Restore by Id
+
+PUT {{Host}}/019fd3ce-1039-76ee-bb68-200a6ff198f6/restore
+
+### Permanently Delete by Id
+
+DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310/permanent

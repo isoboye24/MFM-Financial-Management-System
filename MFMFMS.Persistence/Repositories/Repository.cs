@@ -47,11 +47,13 @@ namespace MFMFMS.Persistence.Repositories
                         .ToListAsync();
         }
 
-        public async Task<T?> GetBack(Guid id)
+        public Task Restore(T entity)
         {
-            return await _db.Set<T>()
-                        .IgnoreQueryFilters()
-                        .FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
+            entity.Restore();
+
+            _db.Update(entity);
+
+            return Task.CompletedTask;
         }
 
         public async Task<T?> GetById(Guid id)
