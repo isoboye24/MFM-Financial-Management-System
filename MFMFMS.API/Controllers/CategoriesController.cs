@@ -5,6 +5,7 @@ using MFMFMS.Application.Features.Categories.Commands.DeleteCategory;
 using MFMFMS.Application.Features.Categories.Commands.UpdateCategory;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryDetail;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
+using MFMFMS.Application.Features.Categories.Queries.GetDeletedCategoryLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,13 @@ namespace MFMFMS.API.Controllers
             return result.Items;
         }
 
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedCategoryListsDTO>>> GetDeleted([FromQuery] GetDeletedCategoryListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDetailDTO>> GetById(Guid id)

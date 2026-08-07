@@ -13,6 +13,11 @@ Content-type: application/json
 GET {{Host}}
 Accept: application/json
 
+### Get All Deleted
+
+GET {{Host}}/deleted
+Accept: application/json
+
 
 ### Search by Id
 

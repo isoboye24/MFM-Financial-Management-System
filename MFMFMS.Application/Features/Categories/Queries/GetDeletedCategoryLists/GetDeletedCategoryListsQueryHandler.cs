@@ -1,5 +1,4 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
-using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Utilities;
 using MFMFMS.Application.Utilities.Common;
 
@@ -13,9 +12,9 @@ namespace MFMFMS.Application.Features.Categories.Queries.GetDeletedCategoryLists
             _repository = repository;
         }
 
-        public Task<PaginatedDTO<DeletedCategoryListsDTO>> Handle(GetDeletedCategoryListsQuery request)
+        public async Task<PaginatedDTO<DeletedCategoryListsDTO>> Handle(GetDeletedCategoryListsQuery request)
         {
-            var categories = await _repository.GetFiltered(request);
+            var categories = await _repository.GetDeletedFiltered(request);
             var totalAmountOfRecords = await _repository.GetTotalAmountOfRecords();
 
             var categoryList = categories.Select(p => p.ToDTO()).ToList();
