@@ -1,9 +1,8 @@
 ﻿using MFMFMS.API.DTOs.Positions;
 using MFMFMS.API.Utilities;
-using MFMFMS.Application.Features.Categories.Commands.RestoreCategory;
-using MFMFMS.Application.Features.Categories.Queries.GetDeletedCategoryLists;
 using MFMFMS.Application.Features.Positions.Commands.CreatePosition;
 using MFMFMS.Application.Features.Positions.Commands.DeletePosition;
+using MFMFMS.Application.Features.Positions.Commands.PermanentDeletePosition;
 using MFMFMS.Application.Features.Positions.Commands.RestorePosition;
 using MFMFMS.Application.Features.Positions.Commands.UpdatePosition;
 using MFMFMS.Application.Features.Positions.Queries.GetDeletedPositionLists;
@@ -87,6 +86,13 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeletePositionCommand { Id = id });
             return NoContent();
         }
     }
