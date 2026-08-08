@@ -1,5 +1,4 @@
-﻿using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
-using MFMFMS.Domain.Entities;
+﻿using MFMFMS.Domain.Entities;
 
 namespace MFMFMS.Application.Features.Categories.Queries.GetDeletedCategoryLists
 {

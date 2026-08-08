@@ -1,10 +1,12 @@
 ﻿using MFMFMS.API.DTOs.Positions;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Categories.Commands.RestoreCategory;
+using MFMFMS.Application.Features.Categories.Queries.GetDeletedCategoryLists;
 using MFMFMS.Application.Features.Positions.Commands.CreatePosition;
 using MFMFMS.Application.Features.Positions.Commands.DeletePosition;
 using MFMFMS.Application.Features.Positions.Commands.RestorePosition;
 using MFMFMS.Application.Features.Positions.Commands.UpdatePosition;
+using MFMFMS.Application.Features.Positions.Queries.GetDeletedPositionLists;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionDetail;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionLists;
 using MFMFMS.Application.Utilities;
@@ -67,6 +69,14 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new DeletePositionCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedPositionListsDTO>>> GetDeleted([FromQuery] GetDeletedPositionListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
 
         [HttpPut("{id}/restore")]
