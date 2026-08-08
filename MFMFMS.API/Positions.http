@@ -5,7 +5,7 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "name": "Postor"
+  "name": "Member"
 }
 
 ### Get All

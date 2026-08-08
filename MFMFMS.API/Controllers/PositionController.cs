@@ -1,5 +1,8 @@
 ﻿using MFMFMS.API.DTOs.Positions;
+using MFMFMS.API.Utilities;
+using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Features.Positions.Commands.CreatePosition;
+using MFMFMS.Application.Features.Positions.Queries.GetPositionLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +28,14 @@ namespace MFMFMS.API.Controllers
             };
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<PositionListsDTO>>> GetAll([FromQuery] GetPositionListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
