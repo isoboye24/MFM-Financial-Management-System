@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Positions;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Positions.Commands.CreatePosition;
+using MFMFMS.Application.Features.Positions.Commands.DeletePosition;
 using MFMFMS.Application.Features.Positions.Commands.UpdatePosition;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionDetail;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionLists;
@@ -56,6 +57,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeletePositionCommand { Id = id });
             return NoContent();
         }
     }
