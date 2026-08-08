@@ -7,7 +7,7 @@ namespace MFMFMS.Application.Contracts.Repositories
     {
         Task<IEnumerable<Month>> GetFiltered(MonthsFilterDTO filter);
 
-        Task<Month?> GetById(Guid id);
+        Task<Month?> GetById(int id);
 
         Task<int> GetTotalAmountOfRecords();
     }

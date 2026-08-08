@@ -32,7 +32,7 @@ namespace MFMFMS.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Month?> GetById(Guid id)
+        public async Task<Month?> GetById(int id)
         {
             return await _db.Months
                 .FirstOrDefaultAsync(x => x.Id == id);
