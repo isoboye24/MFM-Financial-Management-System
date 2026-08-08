@@ -1,0 +1,7 @@
+@Host = http://localhost:5209/api/months
+
+### Get All
+
+GET {{Host}}
+Accept: application/json
+
