@@ -5,7 +5,7 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "name": "Member"
+  "name": "General"
 }
 
 ### Get All
@@ -34,12 +34,12 @@ Content-type: application/json
 
 ### Temporarily Delete by Id
 
-DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310
+DELETE {{Host}}/019fe23b-6128-76ba-bfa2-b9d9726e2877
 
 ### Restore by Id
 
-PUT {{Host}}/019fd3ce-1039-76ee-bb68-200a6ff198f6/restore
+PUT {{Host}}/019fe23b-6128-76ba-bfa2-b9d9726e2877
 
 ### Permanently Delete by Id
 
-DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310/permanent
+DELETE {{Host}}/019fe23b-6128-76ba-bfa2-b9d9726e2877

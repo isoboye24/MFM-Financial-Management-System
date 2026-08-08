@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Positions;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Positions.Commands.CreatePosition;
+using MFMFMS.Application.Features.Positions.Commands.UpdatePosition;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionDetail;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionLists;
 using MFMFMS.Application.Utilities;
@@ -43,6 +44,19 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetPositionDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdatePositionDTO updatePositionDTO)
+        {
+            var command = new UpdatePositionCommand
+            {
+                Id = id,
+                Name = updatePositionDTO.Name,
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }
