@@ -1,7 +1,9 @@
 ﻿using MFMFMS.API.DTOs.Positions;
 using MFMFMS.API.Utilities;
+using MFMFMS.Application.Features.Categories.Commands.RestoreCategory;
 using MFMFMS.Application.Features.Positions.Commands.CreatePosition;
 using MFMFMS.Application.Features.Positions.Commands.DeletePosition;
+using MFMFMS.Application.Features.Positions.Commands.RestorePosition;
 using MFMFMS.Application.Features.Positions.Commands.UpdatePosition;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionDetail;
 using MFMFMS.Application.Features.Positions.Queries.GetPositionLists;
@@ -64,6 +66,17 @@ namespace MFMFMS.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             await _mediator.Send(new DeletePositionCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestorePositionCommand
+            {
+                Id = id
+            });
+
             return NoContent();
         }
     }
