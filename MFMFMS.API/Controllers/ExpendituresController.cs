@@ -3,6 +3,7 @@ using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Expenditures.Commands.CreateExpenditures;
 using MFMFMS.Application.Features.Expenditures.Commands.DeleteExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.UpdateExpenditure;
+using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureDetail;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Utilities;
@@ -68,6 +69,14 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new DeleteExpenditureCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedExpenditureListDTO>>> GetDeleted([FromQuery] GetDeletedExpendituresListQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
