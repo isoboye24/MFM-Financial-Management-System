@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Expenditures;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Expenditures.Commands.CreateExpenditures;
+using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureDetail;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,13 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ExpenditureDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetExpenditureDetailQuery { Id = id };
+            return await _mediator.Send(query);
         }
     }
 }
