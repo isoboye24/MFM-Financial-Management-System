@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Expenditures.Commands.CreateExpenditures;
 using MFMFMS.Application.Features.Expenditures.Commands.DeleteExpenditure;
+using MFMFMS.Application.Features.Expenditures.Commands.PermanentDeleteExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.RestoreExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.UpdateExpenditure;
 using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
@@ -88,6 +89,13 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteExpenditureCommand { Id = id });
             return NoContent();
         }
     }

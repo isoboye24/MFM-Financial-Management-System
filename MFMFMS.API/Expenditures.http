@@ -46,4 +46,4 @@ PUT {{Host}}/019fe627-8051-7320-9fa7-7d2595b0dd97/restore
 
 ### Permanently Delete by Id
 
-DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310/permanent
+DELETE {{Host}}/019fe627-8051-7320-9fa7-7d2595b0dd97/permanent
