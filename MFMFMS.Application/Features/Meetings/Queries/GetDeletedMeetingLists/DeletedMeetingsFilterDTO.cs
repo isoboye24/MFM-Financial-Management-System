@@ -1,0 +1,9 @@
+﻿namespace MFMFMS.Application.Features.Meetings.Queries.GetDeletedMeetingLists
+{
+    public class DeletedMeetingsFilterDTO
+    {
+        public int Page { get; set; } = 1;
+        public int RecordsPerPage { get; set; } = 10;
+        public string? MessageTitle { get; set; }
+    }
+}
