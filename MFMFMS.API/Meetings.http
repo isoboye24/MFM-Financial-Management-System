@@ -5,13 +5,13 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "date": "2026-01-10T12:00:00",
-  "summary": "An annointing service",
-  "messageTitle": "Project Meeting",
-  "minister": "John Smith",
-  "noOfMaleAttendance": 10,
-  "noOfFemaleAttendance": 15,
-  "noOfChildrenAttendance": 7
+  "date": "2026-01-17T10:00:00",
+  "summary": "Normal service",
+  "messageTitle": "The Holy Spirit",
+  "minister": "Carey Smith",
+  "noOfMaleAttendance": 11,
+  "noOfFemaleAttendance": 5,
+  "noOfChildrenAttendance": 5
 }
 
 ### Get All
@@ -27,7 +27,7 @@ Accept: application/json
 
 ### Search by Id
 
-GET {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+GET {{Host}}/019fe83d-9234-7a08-b2f4-0ac2b710e3ff
 ACCEPT: application/json
 
 ### Update by Id

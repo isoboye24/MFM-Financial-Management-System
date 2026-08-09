@@ -1,7 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Meetings;
 using MFMFMS.API.Utilities;
-using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Features.Meetings.Commands.CreateMeetings;
+using MFMFMS.Application.Features.Meetings.Queries.GetMeetingDetail;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +41,13 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MeetingDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetMeetingDetailQuery { Id = id };
+            return await _mediator.Send(query);
         }
     }
 }
