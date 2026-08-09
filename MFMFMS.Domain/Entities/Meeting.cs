@@ -5,18 +5,19 @@ namespace MFMFMS.Domain.Entities
     public class Meeting : SoftDeletableEntity
     {
         public DateTime Date { get; private set; }
-        public string Summary { get; private set; } = string.Empty;
+        public string? Summary { get; private set; } = string.Empty;
         public string MessageTitle { get; private set; } = string.Empty;
         public string Minister { get; private set; } = string.Empty;
         public int NoOfMaleAttendance { get; private set; }
         public int NoOfFemaleAttendance { get; private set; }
         public int NoOfChildrenAttendance { get; private set; }
 
-        public Meeting(DateTime date, string summary, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
+        public Meeting(DateTime date, string? summary, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
         {
-            ValidateAll(date, summary, messageTitle, minister, noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance);
+            ValidateAll(date, messageTitle, minister, noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance);
+
             Date = date;
-            Summary = summary.Trim();
+            Summary = summary?.Trim() ?? string.Empty;
             MessageTitle = messageTitle.Trim();
             Minister = minister.Trim();
             NoOfMaleAttendance = noOfMaleAttendance;
@@ -30,10 +31,9 @@ namespace MFMFMS.Domain.Entities
             
         }
 
-        private static void ValidateAll(DateTime date, string summary, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
+        private static void ValidateAll(DateTime date, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
         {
             ValidateDate(date);
-            ValidateSummary(summary);
             ValidateMessageTitle(messageTitle);
             ValidateMinister(minister);
             ValidateAttendance(noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance);
@@ -53,18 +53,9 @@ namespace MFMFMS.Domain.Entities
             Date = date;
         }
 
-        private static void ValidateSummary(string summary)
+        public void UpdateSummary(string? summary)
         {
-            if (string.IsNullOrWhiteSpace(summary))
-            {
-                throw new BusinessRuleException("Summary is required.");
-            }
-        }
-
-        public void UpdateSummary(string summary)
-        {
-            ValidateSummary(summary);
-            Summary = summary.Trim();
+            Summary = summary?.Trim() ?? string.Empty;
         }
 
         private static void ValidateMessageTitle(string messageTitle)
