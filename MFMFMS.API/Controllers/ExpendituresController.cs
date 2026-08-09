@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Expenditures.Commands.CreateExpenditures;
 using MFMFMS.Application.Features.Expenditures.Commands.DeleteExpenditure;
+using MFMFMS.Application.Features.Expenditures.Commands.RestoreExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.UpdateExpenditure;
 using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureDetail;
@@ -77,6 +78,17 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreExpenditureCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
         }
     }
 }
