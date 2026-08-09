@@ -28,10 +28,12 @@ ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+PUT {{Host}}/019fe627-8051-7320-9fa7-7d2595b0dd97
 Content-type: application/json
 {
-  "name": "Seed"
+  "summary": "Unknown",
+  "amount": 20.0,
+  "date": "2026-07-31T10:15:00"
 }
 
 ### Temporarily Delete by Id

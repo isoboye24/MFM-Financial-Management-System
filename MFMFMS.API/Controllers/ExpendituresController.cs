@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Expenditures;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Expenditures.Commands.CreateExpenditures;
+using MFMFMS.Application.Features.Expenditures.Commands.UpdateExpenditure;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureDetail;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Utilities;
@@ -44,6 +45,21 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetExpenditureDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateExpenditureDTO updateExpenditureDTO)
+        {
+            var command = new UpdateExpenditureCommand
+            {
+                Id = id,
+                Amount = updateExpenditureDTO.Amount,
+                Summary = updateExpenditureDTO.Summary,
+                Date = updateExpenditureDTO.Date,
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }
