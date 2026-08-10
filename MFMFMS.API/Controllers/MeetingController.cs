@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Meetings;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Meetings.Commands.CreateMeetings;
+using MFMFMS.Application.Features.Meetings.Commands.DeleteMeeting;
 using MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingDetail;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists;
@@ -67,6 +68,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteMeetingCommand { Id = id });
             return NoContent();
         }
     }
