@@ -32,10 +32,17 @@ ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+PUT {{Host}}/019fe827-9fdb-7e9e-8041-b5a06c836118
 Content-type: application/json
 {
-  "name": "Seed"
+  
+  "date": "2024-06-01T10:00:00",
+  "summary": "Bible Studies",
+  "messageTitle": "Prayer",
+  "minister": "John Doe",
+  "noOfMaleAttendance": 10,
+  "noOfFemaleAttendance": 4,
+  "noOfChildrenAttendance": 2
 }
 
 ### Temporarily Delete by Id

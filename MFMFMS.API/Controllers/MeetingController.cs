@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Meetings;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Meetings.Commands.CreateMeetings;
+using MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingDetail;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists;
 using MFMFMS.Application.Utilities;
@@ -48,6 +49,25 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetMeetingDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateMeetingDTO updateMeetingDTO)
+        {
+            var command = new UpdateMeetingCommand
+            {
+                Id = id,
+                MessageTitle = updateMeetingDTO.MessageTitle,
+                Date = updateMeetingDTO.Date,
+                Summary = updateMeetingDTO.Summary,
+                Minister = updateMeetingDTO.Minister,
+                NoOfMaleAttendance = updateMeetingDTO.NoOfMaleAttendance,
+                NoOfFemaleAttendance = updateMeetingDTO.NoOfFemaleAttendance,
+                NoOfChildrenAttendance = updateMeetingDTO.NoOfChildrenAttendance
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }
