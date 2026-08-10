@@ -1,8 +1,8 @@
 ﻿using MFMFMS.API.DTOs.Meetings;
 using MFMFMS.API.Utilities;
-using MFMFMS.Application.Features.Categories.Commands.RestoreCategory;
 using MFMFMS.Application.Features.Meetings.Commands.CreateMeetings;
 using MFMFMS.Application.Features.Meetings.Commands.DeleteMeeting;
+using MFMFMS.Application.Features.Meetings.Commands.PermanentDeleteMeeting;
 using MFMFMS.Application.Features.Meetings.Commands.RestoreMeeting;
 using MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting;
 using MFMFMS.Application.Features.Meetings.Queries.GetDeletedMeetingLists;
@@ -97,6 +97,13 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteMeetingCommand { Id = id });
             return NoContent();
         }
     }
