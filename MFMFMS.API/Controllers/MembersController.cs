@@ -1,5 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Members;
+using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
+using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +30,14 @@ namespace MFMFMS.API.Controllers
             };
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<MemberListsDTO>>> GetAll([FromQuery] GetMemberListQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
