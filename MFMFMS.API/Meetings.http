@@ -51,7 +51,7 @@ DELETE {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9
 
 ### Restore by Id
 
-PUT {{Host}}/019fd3ce-1039-76ee-bb68-200a6ff198f6/restore
+PUT {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9/restore
 
 ### Permanently Delete by Id
 
