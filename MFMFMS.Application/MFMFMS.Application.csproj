@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Members\Commands\" />
     <Folder Include="Notifications\" />
   </ItemGroup>
 
