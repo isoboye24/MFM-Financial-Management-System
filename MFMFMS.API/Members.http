@@ -1,0 +1,49 @@
+@Host = http://localhost:5209/api/members
+
+### Insert
+
+Post {{Host}}
+Content-type: application/json
+{
+  "firstName": "Ernest",
+  "lastName": "Dan-Obu",
+  "address": "86 Akazienalle St",
+  "phoneNumber": "+491501856300",
+  "positionId": "019FE1C0-19D4-72C3-8023-1C2C6546B48F"
+}
+
+### Get All
+
+GET {{Host}}
+Accept: application/json
+
+### Get All Deleted
+
+GET {{Host}}/deleted
+Accept: application/json
+
+
+### Search by Id
+
+GET {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+ACCEPT: application/json
+
+### Update by Id
+
+PUT {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+Content-type: application/json
+{
+  "name": "Seed"
+}
+
+### Temporarily Delete by Id
+
+DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310
+
+### Restore by Id
+
+PUT {{Host}}/019fd3ce-1039-76ee-bb68-200a6ff198f6/restore
+
+### Permanently Delete by Id
+
+DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310/permanent
