@@ -14,7 +14,7 @@ namespace MFMFMS.Application.Features.Members.Queries.GetMemberDetail
 
         public async Task<MemberDetailDTO> Handle(GetMemberDetailQuery request)
         {
-            var member = await _repository.GetById(request.Id);
+            var member = await _repository.GetMemberDetail(request.Id);
 
             if (member is null)
             {

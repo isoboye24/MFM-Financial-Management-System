@@ -100,5 +100,12 @@ namespace MFMFMS.Persistence.Repositories
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
         }
+
+        public async Task<Member?> GetMemberDetail(Guid id)
+        {
+            return await _db.Members
+                           .Include(x => x.Position)
+                           .FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }
