@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Members;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
+using MFMFMS.Application.Features.Members.Commands.DeleteMember;
 using MFMFMS.Application.Features.Members.Commands.UpdateMember;
 using MFMFMS.Application.Features.Members.Queries.GetMemberDetail;
 using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
@@ -64,6 +65,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteMemberCommand { Id = id });
             return NoContent();
         }
     }
