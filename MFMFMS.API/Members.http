@@ -5,10 +5,10 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "firstName": "Ernest",
-  "lastName": "Dan-Obu",
+  "firstName": "Testing",
+  "lastName": "Testing",
   "address": "86 Akazienalle St",
-  "phoneNumber": "+491501856300",
+  "phoneNumber": "+4915018548300",
   "positionId": "019FE1C0-19D4-72C3-8023-1C2C6546B48F"
 }
 
@@ -25,15 +25,19 @@ Accept: application/json
 
 ### Search by Id
 
-GET {{Host}}/019febdf-c557-7cf0-aa57-32f9eb900c43
+GET {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
 ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+PUT {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
 Content-type: application/json
 {
-  "name": "Seed"
+  "firstName": "Testing",
+  "lastName": "Testing",
+  "address": "40 Akazienalle St",
+  "phoneNumber": "+4915018548300",
+  "positionId": "019FE1C0-324C-7DAC-B1BA-940C1A5BA4AB"
 }
 
 ### Temporarily Delete by Id

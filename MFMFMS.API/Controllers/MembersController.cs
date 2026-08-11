@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Members;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
+using MFMFMS.Application.Features.Members.Commands.UpdateMember;
 using MFMFMS.Application.Features.Members.Queries.GetMemberDetail;
 using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
 using MFMFMS.Application.Utilities;
@@ -46,6 +47,24 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetMemberDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateMemberDTO updateMemberDTO)
+        {
+            var command = new UpdateMemberCommand
+            {
+                Id = id,
+                FirstName = updateMemberDTO.FirstName,
+                LastName = updateMemberDTO.LastName,
+                Address = updateMemberDTO.Address,
+                PhoneNumber = updateMemberDTO.PhoneNumber,
+                PositionId = updateMemberDTO.PositionId,
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }
