@@ -25,8 +25,6 @@ namespace MFMFMS.Application.Features.Members.Queries.GetMemberLists
             };
 
             return paginatedResult;
-
-
         }
     }
 }
