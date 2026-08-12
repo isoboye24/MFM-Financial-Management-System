@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Givings;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Givings.Commands.CreateGivings;
+using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,13 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GivingDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetGivingDetailQuery { Id = id };
+            return await _mediator.Send(query);
         }
     }
 }

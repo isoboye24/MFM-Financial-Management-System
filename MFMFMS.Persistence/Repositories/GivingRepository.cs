@@ -73,7 +73,7 @@ namespace MFMFMS.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Giving?> GetMemberDetail(Guid id)
+        public async Task<Giving?> GetGivingDetail(Guid id)
         {
             return await _db.Givings
                            .Include(x => x.Meeting)

@@ -9,6 +9,6 @@ namespace MFMFMS.Application.Contracts.Repositories
         Task<bool> Exists(Guid MeetingId, Guid CategoryId);
         Task<IEnumerable<Giving>> GetFiltered(GivingsFilterDTO filter);
         Task<IEnumerable<Giving>> GetDeletedFiltered(DeletedGivingsFilterDTO filter);
-        Task<Giving?> GetMemberDetail(Guid id);
+        Task<Giving?> GetGivingDetail(Guid id);
     }
 }
