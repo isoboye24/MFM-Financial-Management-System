@@ -1,0 +1,52 @@
+@Host = http://localhost:5209/api/givings
+
+### Insert
+
+Post {{Host}}
+Content-type: application/json
+{
+  "Amount": 100.0,
+  "Date": "2026-08-09T09:00:00",
+  "Summary": "Test giving",
+  "MeetingId": "019FE827-9FDB-7E9E-8041-B5A06C836118",
+  "CategoryId": "019FD3CD-B211-7C40-98F6-7528306EECDE"
+}
+
+### Get All
+
+GET {{Host}}
+Accept: application/json
+
+### Search by Id
+
+GET {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
+ACCEPT: application/json
+
+### Update by Id
+
+PUT {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
+Content-type: application/json
+{
+  "firstName": "Testing",
+  "lastName": "Testing",
+  "address": "40 Akazienalle St",
+  "phoneNumber": "+4915018548300",
+  "positionId": "019FE1C0-324C-7DAC-B1BA-940C1A5BA4AB"
+}
+
+### Temporarily Delete by Id
+
+DELETE {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
+
+### Get All Deleted
+
+GET {{Host}}/deleted
+Accept: application/json
+
+### Restore by Id
+
+PUT {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771/restore
+
+### Permanently Delete by Id
+
+DELETE {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771/permanent

@@ -11,6 +11,7 @@ namespace MFMFMS.Persistence.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.Date).IsRequired();
+            builder.Property(x => x.Summary).IsRequired();
 
             builder.HasOne(x => x.Category)
                    .WithMany()
