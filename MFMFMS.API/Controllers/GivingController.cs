@@ -1,6 +1,8 @@
 ﻿using MFMFMS.API.DTOs.Givings;
+using MFMFMS.API.DTOs.Members;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Givings.Commands.CreateGivings;
+using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
 using MFMFMS.Application.Utilities;
@@ -46,6 +48,23 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetGivingDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateGivingDTO updateGivingDTO)
+        {
+            var command = new UpdateGivingCommand
+            {
+                Id = id,
+                Amount = updateGivingDTO.Amount,
+                Date = updateGivingDTO.Date,
+                Summary = updateGivingDTO.Summary,
+                MeetingId = updateGivingDTO.MeetingId,
+                CategoryId = updateGivingDTO.CategoryId,
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }

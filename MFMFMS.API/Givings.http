@@ -27,11 +27,11 @@ ACCEPT: application/json
 PUT {{Host}}/019ff619-85ac-7559-a0ab-068e0d67e15e
 Content-type: application/json
 {
-  "firstName": "Testing",
-  "lastName": "Testing",
-  "address": "40 Akazienalle St",
-  "phoneNumber": "+4915018548300",
-  "positionId": "019FE1C0-324C-7DAC-B1BA-940C1A5BA4AB"
+  "Amount": 30.0,
+  "Date": "2026-08-09T09:00:00",
+  "Summary": "Giving to church building project.",
+  "MeetingId": "019FE827-9FDB-7E9E-8041-B5A06C836118",
+  "CategoryId": "019ff830-c06d-7cfc-b24d-3ed15a5270e7"
 }
 
 ### Temporarily Delete by Id
