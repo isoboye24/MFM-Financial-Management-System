@@ -3,6 +3,7 @@ using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
 using MFMFMS.Application.Features.Members.Commands.DeleteMember;
 using MFMFMS.Application.Features.Members.Commands.UpdateMember;
+using MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists;
 using MFMFMS.Application.Features.Members.Queries.GetMemberDetail;
 using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
 using MFMFMS.Application.Utilities;
@@ -73,6 +74,14 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new DeleteMemberCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedMemberListDTO>>> GetDeleted([FromQuery] GetDeletedMemberListQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }

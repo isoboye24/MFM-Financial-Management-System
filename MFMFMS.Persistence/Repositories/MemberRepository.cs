@@ -89,9 +89,9 @@ namespace MFMFMS.Persistence.Repositories
                 query = query.Where(p => p.PhoneNumber.Contains(filter.PhoneNumber));
             }
 
-            if (filter.PositionId != Guid.Empty)
+            if (filter.PositionId.HasValue)
             {
-                query = query.Where(p => p.PositionId == filter.PositionId);
+                query = query.Where(p => p.PositionId == filter.PositionId.Value);
             }
 
             return await query
