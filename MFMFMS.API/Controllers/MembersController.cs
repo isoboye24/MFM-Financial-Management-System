@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
 using MFMFMS.Application.Features.Members.Commands.DeleteMember;
+using MFMFMS.Application.Features.Members.Commands.PermanentDeleteMember;
 using MFMFMS.Application.Features.Members.Commands.RestoreMember;
 using MFMFMS.Application.Features.Members.Commands.UpdateMember;
 using MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists;
@@ -93,6 +94,13 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteMemberCommand { Id = id });
             return NoContent();
         }
     }
