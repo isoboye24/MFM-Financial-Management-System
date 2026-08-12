@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
 using MFMFMS.Application.Features.Members.Commands.DeleteMember;
+using MFMFMS.Application.Features.Members.Commands.RestoreMember;
 using MFMFMS.Application.Features.Members.Commands.UpdateMember;
 using MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists;
 using MFMFMS.Application.Features.Members.Queries.GetMemberDetail;
@@ -82,6 +83,17 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreMemberCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
         }
     }
 }
