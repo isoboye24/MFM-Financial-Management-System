@@ -3,6 +3,7 @@ using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Givings.Commands.CreateGivings;
 using MFMFMS.Application.Features.Givings.Commands.DeleteGiving;
 using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
+using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
 using MFMFMS.Application.Utilities;
@@ -72,6 +73,14 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new DeleteGivingCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedGivingListsDTO>>> GetDeleted([FromQuery] GetDeletedGivingListQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
