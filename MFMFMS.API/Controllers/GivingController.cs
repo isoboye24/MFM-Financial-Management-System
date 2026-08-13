@@ -1,7 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Givings;
-using MFMFMS.API.DTOs.Members;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Givings.Commands.CreateGivings;
+using MFMFMS.Application.Features.Givings.Commands.DeleteGiving;
 using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
@@ -64,6 +64,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteGivingCommand { Id = id });
             return NoContent();
         }
     }
