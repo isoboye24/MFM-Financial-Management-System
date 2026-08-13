@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Givings.Commands.CreateGivings;
 using MFMFMS.Application.Features.Givings.Commands.DeleteGiving;
+using MFMFMS.Application.Features.Givings.Commands.RestoreGiving;
 using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
@@ -81,6 +82,18 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreGivingCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
         }
     }
 }
