@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Givings.Commands.CreateGivings;
 using MFMFMS.Application.Features.Givings.Commands.DeleteGiving;
+using MFMFMS.Application.Features.Givings.Commands.PermanentDeleteGiving;
 using MFMFMS.Application.Features.Givings.Commands.RestoreGiving;
 using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
@@ -84,7 +85,6 @@ namespace MFMFMS.API.Controllers
             return result.Items;
         }
 
-
         [HttpPut("{id}/restore")]
         public async Task<IActionResult> Restore(Guid id)
         {
@@ -93,6 +93,14 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteGivingCommand { Id = id });
             return NoContent();
         }
     }
