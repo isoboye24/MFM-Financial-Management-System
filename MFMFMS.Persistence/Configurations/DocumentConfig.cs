@@ -10,7 +10,7 @@ namespace MFMFMS.Persistence.Configurations
         {
             builder.Property(prop => prop.Name).IsRequired();
             builder.Property(prop => prop.BlobName).IsRequired();
-            builder.Property(x => x.DocumentType).HasConversion<string>().IsRequired();
+            builder.Property(prop => prop.DocumentType).IsRequired();
             builder.Property(x => x.UploadedAt).IsRequired();
         }
     }
