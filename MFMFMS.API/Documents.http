@@ -32,7 +32,7 @@ Content-type: application/json
 
 ### Temporarily Delete by Id
 
-DELETE {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
+DELETE {{Host}}/019ffcc9-a40a-739e-a14a-65ae2d0f3225
 
 ### Get All Deleted
 
@@ -41,8 +41,8 @@ Accept: application/json
 
 ### Restore by Id
 
-PUT {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771/restore
+PUT {{Host}}/019ffcc9-a40a-739e-a14a-65ae2d0f3225/restore
 
 ### Permanently Delete by Id
 
-DELETE {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771/permanent
+DELETE {{Host}}/019ffcc9-a40a-739e-a14a-65ae2d0f3225/permanent

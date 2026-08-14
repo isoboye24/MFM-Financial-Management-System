@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Documents;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Documents.Commands.CreateDocuments;
+using MFMFMS.Application.Features.Documents.Commands.DeleteDocument;
 using MFMFMS.Application.Features.Documents.Commands.UpdateDocument;
 using MFMFMS.Application.Features.Documents.Queries.GetDocumentDetail;
 using MFMFMS.Application.Features.Documents.Queries.GetDocumentLists;
@@ -59,6 +60,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteDocumentCommand { Id = id });
             return NoContent();
         }
     }
