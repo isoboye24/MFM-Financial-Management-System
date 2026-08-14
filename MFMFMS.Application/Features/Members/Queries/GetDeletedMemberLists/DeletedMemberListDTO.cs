@@ -8,5 +8,6 @@
         public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
         public required string PositionName { get; set; }
+        public required DateTime DeletedAt { get; set; }
     }
 }
