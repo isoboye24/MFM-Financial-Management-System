@@ -25,9 +25,9 @@ ACCEPT: application/json
 PUT {{Host}}/019ffcc9-a40a-739e-a14a-65ae2d0f3225
 Content-type: application/json
 { 
-  "name": "2026 Financial Report",
-  "blobName": "2026-FR-document.pdf",
-  "documentType": 0
+  "name": "2025 Financial Report",
+  "blobName": "2025-FR-document.pdf",
+  "documentType": 1
 }
 
 ### Temporarily Delete by Id
