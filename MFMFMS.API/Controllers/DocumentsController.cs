@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Documents.Commands.CreateDocuments;
 using MFMFMS.Application.Features.Documents.Commands.DeleteDocument;
+using MFMFMS.Application.Features.Documents.Commands.RestoreDocument;
 using MFMFMS.Application.Features.Documents.Commands.UpdateDocument;
 using MFMFMS.Application.Features.Documents.Queries.GetDeletedDocumentLists;
 using MFMFMS.Application.Features.Documents.Queries.GetDocumentDetail;
@@ -77,6 +78,17 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreDocumentCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
         }
     }
 }
