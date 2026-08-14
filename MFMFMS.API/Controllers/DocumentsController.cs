@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Documents.Commands.CreateDocuments;
 using MFMFMS.Application.Features.Documents.Commands.DeleteDocument;
+using MFMFMS.Application.Features.Documents.Commands.PermanentDeleteDocument;
 using MFMFMS.Application.Features.Documents.Commands.RestoreDocument;
 using MFMFMS.Application.Features.Documents.Commands.UpdateDocument;
 using MFMFMS.Application.Features.Documents.Queries.GetDeletedDocumentLists;
@@ -88,6 +89,13 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteDocumentCommand { Id = id });
             return NoContent();
         }
     }
