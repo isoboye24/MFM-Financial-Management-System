@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Documents;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.Documents.Commands.CreateDocuments;
+using MFMFMS.Application.Features.Documents.Queries.GetDocumentDetail;
 using MFMFMS.Application.Features.Documents.Queries.GetDocumentLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,13 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DocumentDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetDocumentDetailQuery { Id = id };
+            return await _mediator.Send(query);
         }
     }
 }
