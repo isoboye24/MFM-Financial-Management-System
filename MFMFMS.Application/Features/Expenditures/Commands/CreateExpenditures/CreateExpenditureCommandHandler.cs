@@ -1,5 +1,6 @@
 ﻿using MFMFMS.Application.Contracts.Persistence;
 using MFMFMS.Application.Contracts.Repositories;
+using MFMFMS.Application.Exceptions;
 using MFMFMS.Application.Utilities;
 using MFMFMS.Domain.Entities;
 
@@ -17,19 +18,28 @@ namespace MFMFMS.Application.Features.Expenditures.Commands.CreateExpenditures
 
         public async Task<Guid> Handle(CreateExpenditureCommand request)
         {
-            var expenditure = new Expenditure(request.Amount, request.Date, request.Summary);
+            bool exists = await _repository.Exists(request.Summary, request.Date);
 
-            try
+            if (exists)
             {
-                var result = await _repository.Add(expenditure);
-                await _unitOfWork.Commit();
-                return result.Id;
+                throw new CustomValidationException("The Expenditure already exists.");
             }
-            catch (Exception)
+            else
             {
-                await _unitOfWork.Rollback();
-                throw;
-            }
+                var expenditure = new Expenditure(request.Amount, request.Date, request.Summary);
+
+                try
+                {
+                    var result = await _repository.Add(expenditure);
+                    await _unitOfWork.Commit();
+                    return result.Id;
+                }
+                catch (Exception)
+                {
+                    await _unitOfWork.Rollback();
+                    throw;
+                }
+            }            
         }
     }
 }

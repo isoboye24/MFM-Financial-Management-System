@@ -5,9 +5,9 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "summary": "Uknown",
-  "amount": 10.0,
-  "date": "2026-07-31T10:15:00"
+  "summary": "Seed",
+  "amount": 50.0,
+  "date": "2026-08-18T10:45:00"
 }
 
 ### Get All

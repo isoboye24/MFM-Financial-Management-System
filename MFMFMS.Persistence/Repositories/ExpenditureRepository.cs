@@ -16,6 +16,23 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
+        public async Task<bool> Exists(string summary, DateTime date)
+        {
+            var startOfDay = date.Date;
+            var endOfDay = startOfDay.AddDays(1);
+
+            var exists = await _db.Expenditures.Where(x => x.Summary == summary && x.Date >= startOfDay && x.Date < endOfDay).AnyAsync();
+
+            if (exists)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public async Task<IEnumerable<Expenditure>> GetDeletedFiltered(DeletedExpendituresFilterDTO filter)
         {
             var query = _db.Expenditures.Where(x => x.IsDeleted);
