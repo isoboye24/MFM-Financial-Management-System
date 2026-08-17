@@ -5,7 +5,7 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "name": "Project"
+  "name": "First Fruit"
 }
 
 ### Get All
