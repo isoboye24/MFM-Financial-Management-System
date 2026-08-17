@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MFMFMS.Application\MFMFMS.Application.csproj" />
     <ProjectReference Include="..\MFMFMS.Persistence\MFMFMS.Persistence.csproj" />
+    <ProjectReference Include="..\MFMFMS.Security\MFMFMS.Security.csproj" />
   </ItemGroup>
 
 </Project>

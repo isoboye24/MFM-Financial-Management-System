@@ -32,6 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.env = .env
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{E6804498-A873-4837-9AFC-8AE2BF3A3729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFMFMS.Security", "MFMFMS.Security\MFMFMS.Security.csproj", "{50E67BCD-23E1-4613-A29D-24591F9E58CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,10 @@ Global
 		{D8B74558-2AD8-4428-810E-0CDB6732D4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8B74558-2AD8-4428-810E-0CDB6732D4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8B74558-2AD8-4428-810E-0CDB6732D4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50E67BCD-23E1-4613-A29D-24591F9E58CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50E67BCD-23E1-4613-A29D-24591F9E58CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50E67BCD-23E1-4613-A29D-24591F9E58CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50E67BCD-23E1-4613-A29D-24591F9E58CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +81,7 @@ Global
 		{E98C2540-E73C-4BDB-BA98-236941F5C9D0} = {877927B2-76E2-4F46-AEE4-96ADCD0B0ECF}
 		{12304D05-EC9A-4384-A332-BE90E1011D49} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D8B74558-2AD8-4428-810E-0CDB6732D4B5} = {E30C66F1-4C19-412F-B74D-08B1BA7A0D90}
+		{50E67BCD-23E1-4613-A29D-24591F9E58CF} = {E6804498-A873-4837-9AFC-8AE2BF3A3729}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24AD681D-3A7F-4188-B32B-E1A4A4699084}

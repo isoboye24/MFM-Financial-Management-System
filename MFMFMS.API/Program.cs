@@ -2,6 +2,8 @@ using DotNetEnv;
 using MFMFMS.API.Middleware;
 using MFMFMS.Application;
 using MFMFMS.Persistence;
+using MFMFMS.Security;
+using MFMFMS.Security.Models;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +17,9 @@ builder.Services.AddControllers();
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddControllers();
 
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddSecurityServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 
@@ -28,6 +30,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 var app = builder.Build();
 
+app.MapIdentityApi<User>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -37,6 +40,9 @@ if (app.Environment.IsDevelopment())
 app.UseCustomExceptionHandler();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 
