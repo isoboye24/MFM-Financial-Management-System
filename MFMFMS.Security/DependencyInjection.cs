@@ -17,7 +17,7 @@ namespace MFMFMS.Security
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin"));
+                options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin, true"));
             });
 
             services.AddDbContext<MFMFMSSecurityDBContext>(options =>
