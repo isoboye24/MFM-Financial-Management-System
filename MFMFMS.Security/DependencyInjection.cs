@@ -8,14 +8,15 @@ namespace MFMFMS.Security
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddSecurityServices(
-           this IServiceCollection services,
-           IConfiguration configuration)
+        public static IServiceCollection AddSecurityServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(IdentityConstants.BearerScheme)
                 .AddBearerToken(IdentityConstants.BearerScheme);
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin"));
+            });
 
             services.AddDbContext<MFMFMSSecurityDBContext>(options =>
                 options.UseSqlServer(

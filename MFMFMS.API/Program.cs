@@ -4,6 +4,7 @@ using MFMFMS.Application;
 using MFMFMS.Persistence;
 using MFMFMS.Security;
 using MFMFMS.Security.Models;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,10 @@ Env.TraversePath().Load();
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddControllers(options =>
+options.Filters.Add(new AuthorizeFilter("isAdmin"))
+);
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddControllers();

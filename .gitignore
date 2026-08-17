@@ -361,3 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Local HTTP test files containing credentials
+Security.http
+Categories.http
+Documents.http
+Expenditures.http
+Givings.http
+Meetings.http
+Members.http
+Months.http
+Positions.http

@@ -1,4 +1,4 @@
-@Host = http://localhost:5209/api/members
+@Host = https://localhost:7002/api/members
 
 ### Insert
 

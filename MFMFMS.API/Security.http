@@ -1,12 +1,12 @@
-@Host = http://localhost:5209/api/members
+@Host = https://localhost:7002
 
 ### Insert
 
 POST {{Host}}/register
 content-type: application/json
 {
-  "email":"isoboyedanobu@gmail.com",
-  "password":"20Dc26ms@"
+  "email":"mfm@gmail.com",
+  "password":"20Mfm26ms@"
 }
 
 ### Login
@@ -14,6 +14,6 @@ content-type: application/json
 POST {{Host}}/login
 content-type: application/json
 {
-  "email":"isoboyedanobu@gmail.com",
-  "password":"20Dc26ms@"
+  "email":"mfm@gmail.com",
+  "password":"20Mfm26ms@"
 }

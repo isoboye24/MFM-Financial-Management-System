@@ -1,4 +1,4 @@
-@Host = http://localhost:5209/api/meetings
+@Host = https://localhost:7002/api/meetings
 
 ### Insert
 
