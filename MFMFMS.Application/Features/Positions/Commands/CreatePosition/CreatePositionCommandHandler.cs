@@ -1,5 +1,6 @@
 ﻿using MFMFMS.Application.Contracts.Persistence;
 using MFMFMS.Application.Contracts.Repositories;
+using MFMFMS.Application.Exceptions;
 using MFMFMS.Application.Utilities;
 using MFMFMS.Domain.Entities;
 
@@ -18,19 +19,28 @@ namespace MFMFMS.Application.Features.Positions.Commands.CreatePosition
 
         public async Task<Guid> Handle(CreatePositionCommand request)
         {
-            var position = new Position(request.Name);
+            bool exists = await _repository.Exists(request.Name);
 
-            try
+            if (exists)
             {
-                var result = await _repository.Add(position);
-                await _unitOfWork.Commit();
-                return result.Id;
+                throw new CustomValidationException("The position already exists.");
             }
-            catch (Exception)
+            else
             {
-                await _unitOfWork.Rollback();
-                throw;
-            }
+                var position = new Position(request.Name);
+
+                try
+                {
+                    var result = await _repository.Add(position);
+                    await _unitOfWork.Commit();
+                    return result.Id;
+                }
+                catch (Exception)
+                {
+                    await _unitOfWork.Rollback();
+                    throw;
+                }
+            }               
         }
     }
 }

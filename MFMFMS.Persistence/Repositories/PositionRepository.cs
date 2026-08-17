@@ -15,6 +15,20 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
+        public async Task<bool> Exists(string name)
+        {
+            var exists = await _db.Positions.Where(x => x.Name == name).AnyAsync();
+
+            if (exists)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public async Task<IEnumerable<Position>> GetDeletedFiltered(DeletedPositionsFilterDTO filter)
         {
             var query = _db.Positions.Where(x => x.IsDeleted);
