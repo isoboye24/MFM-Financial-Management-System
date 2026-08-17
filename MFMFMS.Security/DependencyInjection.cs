@@ -1,4 +1,6 @@
-﻿using MFMFMS.Security.Models;
+﻿using MFMFMS.Application.Contracts.Repositories;
+using MFMFMS.Security.Models;
+using MFMFMS.Security.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +27,9 @@ namespace MFMFMS.Security
             services.AddIdentityCore<User>()
                 .AddEntityFrameworkStores<MFMFMSSecurityDBContext>()
                 .AddApiEndpoints();
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddHttpContextAccessor();
 
             return services;
         }
