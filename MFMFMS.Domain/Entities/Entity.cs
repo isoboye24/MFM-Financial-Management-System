@@ -2,7 +2,7 @@
 
 namespace MFMFMS.Domain.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : Auditable
     {
         public Guid Id { get; protected set; }
 

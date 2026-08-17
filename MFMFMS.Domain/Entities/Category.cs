@@ -1,4 +1,5 @@
-﻿using MFMFMS.Domain.Exceptions;
+﻿using MFMFMS.Domain.Common;
+using MFMFMS.Domain.Exceptions;
 
 namespace MFMFMS.Domain.Entities
 {

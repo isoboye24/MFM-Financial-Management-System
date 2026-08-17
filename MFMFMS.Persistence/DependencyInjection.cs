@@ -6,8 +6,7 @@ namespace MFMFMS.Persistence
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
-           IConfiguration configuration)
+        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Register the DbContext with the connection string from configuration
             services.AddDbContext<MFMFMSDBContext>(options =>
