@@ -1,5 +1,6 @@
 ﻿using MFMFMS.Application.Contracts.Persistence;
 using MFMFMS.Application.Contracts.Repositories;
+using MFMFMS.Application.Exceptions;
 using MFMFMS.Application.Utilities;
 using MFMFMS.Domain.Entities;
 
@@ -17,20 +18,29 @@ namespace MFMFMS.Application.Features.Meetings.Commands.CreateMeetings
 
         public async Task<Guid> Handle(CreateMeetingsCommand request)
         {
-            var meeting = new Meeting(request.Date, request.Summary, request.MessageTitle, request.Minister, request.NoOfMaleAttendance, request.NoOfFemaleAttendance, 
-                request.NoOfChildrenAttendance);
+            bool exists = await _repository.Exists(request.Minister, request.Date);
 
-            try
+            if (exists)
             {
-                var result = await _repository.Add(meeting);
-                await _unitOfWork.Commit();
-                return result.Id;
+                throw new CustomValidationException("The Meeting already exists.");
             }
-            catch (Exception)
+            else
             {
-                await _unitOfWork.Rollback();
-                throw;
-            }
+                var meeting = new Meeting(request.Date, request.Summary, request.MessageTitle, request.Minister, request.NoOfMaleAttendance, request.NoOfFemaleAttendance,
+                    request.NoOfChildrenAttendance);
+
+                try
+                {
+                    var result = await _repository.Add(meeting);
+                    await _unitOfWork.Commit();
+                    return result.Id;
+                }
+                catch (Exception)
+                {
+                    await _unitOfWork.Rollback();
+                    throw;
+                }
+            }                
         }
     }
 }

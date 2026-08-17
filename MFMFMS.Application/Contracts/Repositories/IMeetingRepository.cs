@@ -6,6 +6,7 @@ namespace MFMFMS.Application.Contracts.Repositories
 {
     public interface IMeetingRepository : IRepository<Meeting>
     {
+        Task<bool> Exists(string minister, DateTime date);
         Task<IEnumerable<Meeting>> GetFiltered(MeetingsFilterDTO filter);
         Task<IEnumerable<Meeting>> GetDeletedFiltered(DeletedMeetingsFilterDTO filter);
     }
