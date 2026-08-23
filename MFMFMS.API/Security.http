@@ -17,3 +17,8 @@ content-type: application/json
   "email":"mfm@gmail.com",
   "password":"20Mfm26ms@"
 }
+
+### Test Claims
+
+GET {{Host}}/api/security-test/claims
+Accept: application/json

@@ -15,10 +15,10 @@ namespace MFMFMS.Security
             services.AddAuthentication(IdentityConstants.BearerScheme)
                 .AddBearerToken(IdentityConstants.BearerScheme);
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin, true"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("isAdmin", policy => policy.RequireClaim("isAdmin", "true"));
+            //});
 
             services.AddDbContext<MFMFMSSecurityDBContext>(options =>
                 options.UseSqlServer(

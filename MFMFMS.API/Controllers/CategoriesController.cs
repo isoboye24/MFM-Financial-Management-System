@@ -9,6 +9,7 @@ using MFMFMS.Application.Features.Categories.Queries.GetCategoryDetail;
 using MFMFMS.Application.Features.Categories.Queries.GetCategoryLists;
 using MFMFMS.Application.Features.Categories.Queries.GetDeletedCategoryLists;
 using MFMFMS.Application.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MFMFMS.API.Controllers

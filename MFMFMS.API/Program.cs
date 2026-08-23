@@ -6,7 +6,6 @@ using MFMFMS.Security;
 using MFMFMS.Security.Models;
 using MFMFMS.Security.Seed;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,14 +14,12 @@ Env.TraversePath().Load();
 
 // Add services to the container.
 
-builder.Services.AddControllers(options =>
-    options.Filters.Add(new AuthorizeFilter("isAdmin"))
-)
-.AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.Converters.Add(
-        new JsonStringEnumConverter());
-});
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter());
+    });
 
 builder.Configuration.AddEnvironmentVariables();
 
