@@ -5,14 +5,14 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "date": "2026-01-17T10:00:00",
-  "summary": "Normal service",
-  "messageTitle": "The Holy Spirit",
+  "date": "2026-02-17T10:00:00",
+  "summary": "Healing service",
+  "messageTitle": "The Lord Your God",
   "minister": "Carey Smith",
   "noOfMaleAttendance": 11,
   "noOfFemaleAttendance": 5,
   "noOfChildrenAttendance": 5,
-    "meetingCategoryId": "01a067c1-b194-7401-abd0-61a532f05995"
+  "meetingCategoryId": "01a068e7-50ae-7352-9acb-5a95026aecb1"
 }
 
 ### Get All

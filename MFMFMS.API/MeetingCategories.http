@@ -5,7 +5,7 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "name": "Bible Studies"
+  "name": "Healing Service"
 }
 
 ### Get All

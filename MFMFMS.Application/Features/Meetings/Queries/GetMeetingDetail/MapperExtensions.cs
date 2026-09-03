@@ -16,7 +16,7 @@ namespace MFMFMS.Application.Features.Meetings.Queries.GetMeetingDetail
                 NoOfMaleAttendance = meeting.NoOfMaleAttendance,
                 NoOfFemaleAttendance = meeting.NoOfFemaleAttendance,
                 NoOfChildrenAttendance = meeting.NoOfChildrenAttendance,
-                MeetingCategoryId = meeting.MeetingCategoryId
+                MeetingCategory = meeting.MeetingCategory?.Name ?? string.Empty
             };
         }
     }

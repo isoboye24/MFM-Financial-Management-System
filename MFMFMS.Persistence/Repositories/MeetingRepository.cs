@@ -42,6 +42,7 @@ namespace MFMFMS.Persistence.Repositories
             }
 
             return await query
+                .Include(x => x.MeetingCategory)
                 .OrderBy(x => x.MessageTitle)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
@@ -57,6 +58,7 @@ namespace MFMFMS.Persistence.Repositories
             }
 
             return await query
+                .Include(x => x.MeetingCategory)
                 .OrderBy(x => x.Date)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
