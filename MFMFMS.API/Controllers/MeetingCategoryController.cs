@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.MeetingCategories;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MeetingCategories.Commands.CreateMeetingCategories;
+using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryDetail;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -36,5 +37,11 @@ namespace MFMFMS.API.Controllers
             return result.Items;
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MeetingCategoryDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetMeetingCategoryDetailQuery { Id = id };
+            return await _mediator.Send(query);
+        }
     }
 }

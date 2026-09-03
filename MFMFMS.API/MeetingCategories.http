@@ -13,15 +13,9 @@ Content-type: application/json
 GET {{Host}}
 Accept: application/json
 
-### Get All Deleted
-
-GET {{Host}}/deleted
-Accept: application/json
-
-
 ### Search by Id
 
-GET {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+GET {{Host}}/01a067c2-5d0e-79e2-b078-462a5829162d
 ACCEPT: application/json
 
 ### Update by Id
@@ -35,6 +29,12 @@ Content-type: application/json
 ### Temporarily Delete by Id
 
 DELETE {{Host}}/019fd42c-36ec-79c7-a5b2-c97434dae310
+
+
+### Get All Deleted
+
+GET {{Host}}/deleted
+Accept: application/json
 
 ### Restore by Id
 
