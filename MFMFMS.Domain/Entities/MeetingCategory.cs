@@ -2,11 +2,11 @@
 
 namespace MFMFMS.Domain.Entities
 {
-    public class Category : SoftDeletableEntity
+    public class MeetingCategory : SoftDeletableEntity
     {
         public string Name { get; private set; } = string.Empty;
 
-        public Category(string name)
+        public MeetingCategory(string name)
         {
             ValidateName(name);
 
@@ -14,9 +14,9 @@ namespace MFMFMS.Domain.Entities
             Id = Guid.CreateVersion7();
         }
 
-        private Category()
+        private MeetingCategory()
         {
-            
+
         }
 
         public void UpdateName(string name)
@@ -29,7 +29,7 @@ namespace MFMFMS.Domain.Entities
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new BusinessRuleException("Category's name is required.");
+                throw new BusinessRuleException("Meeting category's name is required.");
             }
         }
     }
