@@ -20,10 +20,10 @@ ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fd3cd-b211-7c40-98f6-7528306eecde
+PUT {{Host}}/01a067c2-5d0e-79e2-b078-462a5829162d
 Content-type: application/json
 {
-  "name": "Seed"
+  "name": "Prayer Meeting"
 }
 
 ### Temporarily Delete by Id

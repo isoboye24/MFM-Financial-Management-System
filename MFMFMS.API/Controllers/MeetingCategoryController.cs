@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.MeetingCategories;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MeetingCategories.Commands.CreateMeetingCategories;
+using MFMFMS.Application.Features.MeetingCategories.Commands.UpdateMeetingCategory;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryDetail;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryLists;
 using MFMFMS.Application.Utilities;
@@ -42,6 +43,19 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetMeetingCategoryDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateMeetingCategoryDTO updateMeetingCategoryDTO)
+        {
+            var command = new UpdateMeetingCategoryCommand
+            {
+                Id = id,
+                Name = updateMeetingCategoryDTO.Name,
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }
