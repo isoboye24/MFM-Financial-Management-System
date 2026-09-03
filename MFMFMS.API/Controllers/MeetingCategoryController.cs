@@ -1,7 +1,9 @@
 ﻿using MFMFMS.API.DTOs.MeetingCategories;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MeetingCategories.Commands.CreateMeetingCategories;
+using MFMFMS.Application.Features.MeetingCategories.Commands.DeleteMeetingCategory;
 using MFMFMS.Application.Features.MeetingCategories.Commands.UpdateMeetingCategory;
+using MFMFMS.Application.Features.MeetingCategories.Queries.GetDeletedMeetingCategoryLists;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryDetail;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryLists;
 using MFMFMS.Application.Utilities;
@@ -56,6 +58,21 @@ namespace MFMFMS.API.Controllers
 
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteMeetingCategoryCommand { Id = id });
+            return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedMeetingCategoryListsDTO>>> GetDeleted([FromQuery] GetDeletedMeetingCategoryQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
