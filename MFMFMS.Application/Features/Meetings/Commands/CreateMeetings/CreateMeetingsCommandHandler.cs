@@ -18,7 +18,7 @@ namespace MFMFMS.Application.Features.Meetings.Commands.CreateMeetings
 
         public async Task<Guid> Handle(CreateMeetingsCommand request)
         {
-            bool exists = await _repository.Exists(request.Minister, request.Date);
+            bool exists = await _repository.Exists(request.Minister, request.Date, request.MeetingCategoryId);
 
             if (exists)
             {
@@ -27,7 +27,7 @@ namespace MFMFMS.Application.Features.Meetings.Commands.CreateMeetings
             else
             {
                 var meeting = new Meeting(request.Date, request.Summary, request.MessageTitle, request.Minister, request.NoOfMaleAttendance, request.NoOfFemaleAttendance,
-                    request.NoOfChildrenAttendance);
+                    request.NoOfChildrenAttendance, request.MeetingCategoryId);
 
                 try
                 {

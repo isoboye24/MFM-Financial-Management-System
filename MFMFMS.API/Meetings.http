@@ -11,7 +11,8 @@ Content-type: application/json
   "minister": "Carey Smith",
   "noOfMaleAttendance": 11,
   "noOfFemaleAttendance": 5,
-  "noOfChildrenAttendance": 5
+  "noOfChildrenAttendance": 5,
+    "meetingCategoryId": "01a067c1-b194-7401-abd0-61a532f05995"
 }
 
 ### Get All

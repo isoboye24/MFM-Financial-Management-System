@@ -34,7 +34,8 @@ namespace MFMFMS.API.Controllers
                 Minister = createMeetingDTO.Minister,
                 NoOfMaleAttendance = createMeetingDTO.NoOfMaleAttendance,
                 NoOfFemaleAttendance = createMeetingDTO.NoOfFemaleAttendance,
-                NoOfChildrenAttendance = createMeetingDTO.NoOfChildrenAttendance
+                NoOfChildrenAttendance = createMeetingDTO.NoOfChildrenAttendance,
+                MeetingCategoryId = createMeetingDTO.MeetingCategoryId
             };
             await _mediator.Send(command);
             return Ok();
@@ -67,7 +68,8 @@ namespace MFMFMS.API.Controllers
                 Minister = updateMeetingDTO.Minister,
                 NoOfMaleAttendance = updateMeetingDTO.NoOfMaleAttendance,
                 NoOfFemaleAttendance = updateMeetingDTO.NoOfFemaleAttendance,
-                NoOfChildrenAttendance = updateMeetingDTO.NoOfChildrenAttendance
+                NoOfChildrenAttendance = updateMeetingDTO.NoOfChildrenAttendance,
+                MeetingCategoryId = updateMeetingDTO.MeetingCategoryId
             };
 
             await _mediator.Send(command);

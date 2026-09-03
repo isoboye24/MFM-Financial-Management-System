@@ -12,6 +12,7 @@ namespace MFMFMS.Application.Features.Meetings.Commands.CreateMeetings
             RuleFor(p => p.NoOfMaleAttendance).GreaterThanOrEqualTo(0).WithMessage("The field {PropertyName} cannot be negative.");
             RuleFor(p => p.NoOfFemaleAttendance).GreaterThanOrEqualTo(0).WithMessage("The field {PropertyName} cannot be negative.");
             RuleFor(p => p.NoOfChildrenAttendance).GreaterThanOrEqualTo(0).WithMessage("The field {PropertyName} cannot be negative.");
+            RuleFor(p => p.MeetingCategoryId).NotEmpty().WithMessage("The field {PropertyName} is required.");
         }
     }
 }

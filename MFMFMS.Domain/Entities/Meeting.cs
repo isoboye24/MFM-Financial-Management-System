@@ -11,10 +11,14 @@ namespace MFMFMS.Domain.Entities
         public int NoOfMaleAttendance { get; private set; }
         public int NoOfFemaleAttendance { get; private set; }
         public int NoOfChildrenAttendance { get; private set; }
+        public Guid MeetingCategoryId { get; private set; }
+        public MeetingCategory? MeetingCategory { get; private set; }
 
-        public Meeting(DateTime date, string? summary, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
+        public Meeting(DateTime date, string? summary, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance, 
+            Guid meetingCategoryId)
         {
-            ValidateAll(date, messageTitle, minister, noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance);
+            ValidateAll(date, messageTitle, minister, noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance, meetingCategoryId);
+            ValidateMeetingCategoryId(meetingCategoryId);
 
             Date = date;
             Summary = summary?.Trim() ?? string.Empty;
@@ -23,6 +27,7 @@ namespace MFMFMS.Domain.Entities
             NoOfMaleAttendance = noOfMaleAttendance;
             NoOfFemaleAttendance = noOfFemaleAttendance;
             NoOfChildrenAttendance = noOfChildrenAttendance;
+            MeetingCategoryId = meetingCategoryId;
             Id = Guid.CreateVersion7();
         }
 
@@ -31,12 +36,14 @@ namespace MFMFMS.Domain.Entities
             
         }
 
-        private static void ValidateAll(DateTime date, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance)
+        private static void ValidateAll(DateTime date, string messageTitle, string minister, int noOfMaleAttendance, int noOfFemaleAttendance, int noOfChildrenAttendance, 
+            Guid meetingCategoryId)
         {
             ValidateDate(date);
             ValidateMessageTitle(messageTitle);
             ValidateMinister(minister);
             ValidateAttendance(noOfMaleAttendance, noOfFemaleAttendance, noOfChildrenAttendance);
+            ValidateMeetingCategoryId(meetingCategoryId);
         }
 
         private static void ValidateDate(DateTime date)
@@ -101,6 +108,20 @@ namespace MFMFMS.Domain.Entities
             NoOfMaleAttendance = noOfMaleAttendance;
             NoOfFemaleAttendance = noOfFemaleAttendance;
             NoOfChildrenAttendance = noOfChildrenAttendance;
+        }
+
+        private static void ValidateMeetingCategoryId(Guid meetingCategoryId)
+        {
+            if (meetingCategoryId == Guid.Empty)
+            {
+                throw new BusinessRuleException("Meeting category is required.");
+            }
+        }
+
+        public void UpdateMeetingCategoryId(Guid meetingCategoryId)
+        {
+            ValidateMeetingCategoryId(meetingCategoryId);
+            MeetingCategoryId = meetingCategoryId;
         }
     }
 }

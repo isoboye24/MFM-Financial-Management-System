@@ -15,12 +15,12 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
-        public async Task<bool> Exists(string minister, DateTime date)
+        public async Task<bool> Exists(string minister, DateTime date, Guid meetingCategoryId)
         {
             var startOfDay = date.Date;
             var endOfDay = startOfDay.AddDays(1);
 
-            var exists = await _db.Meetings.Where(x => x.Minister == minister && x.Date >= startOfDay && x.Date < endOfDay).AnyAsync();
+            var exists = await _db.Meetings.Where(x => x.Minister == minister && x.Date >= startOfDay && x.Date < endOfDay && x.MeetingCategoryId == meetingCategoryId).AnyAsync();
 
             if (exists)
             {
@@ -57,7 +57,7 @@ namespace MFMFMS.Persistence.Repositories
             }
 
             return await query
-                .OrderBy(x => x.MessageTitle)
+                .OrderBy(x => x.Date)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
         }

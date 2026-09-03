@@ -15,7 +15,8 @@ namespace MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists
                 Minister = meeting.Minister,
                 NoOfMaleAttendance = meeting.NoOfMaleAttendance,
                 NoOfFemaleAttendance = meeting.NoOfFemaleAttendance,
-                NoOfChildrenAttendance = meeting.NoOfChildrenAttendance
+                NoOfChildrenAttendance = meeting.NoOfChildrenAttendance,
+                MeetingCategoryId = meeting.MeetingCategoryId
             };
         }
     }
