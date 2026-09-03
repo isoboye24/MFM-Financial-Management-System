@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MeetingCategories.Commands.CreateMeetingCategories;
 using MFMFMS.Application.Features.MeetingCategories.Commands.DeleteMeetingCategory;
+using MFMFMS.Application.Features.MeetingCategories.Commands.RestoreMeetingCategory;
 using MFMFMS.Application.Features.MeetingCategories.Commands.UpdateMeetingCategory;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetDeletedMeetingCategoryLists;
 using MFMFMS.Application.Features.MeetingCategories.Queries.GetMeetingCategoryDetail;
@@ -73,6 +74,17 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreMeetingCategoryCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
         }
     }
 }

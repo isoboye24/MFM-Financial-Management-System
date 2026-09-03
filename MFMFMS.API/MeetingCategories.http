@@ -38,7 +38,7 @@ Accept: application/json
 
 ### Restore by Id
 
-PUT {{Host}}/019fd3ce-1039-76ee-bb68-200a6ff198f6/restore
+PUT {{Host}}/01a067c2-5d0e-79e2-b078-462a5829162d/restore
 
 ### Permanently Delete by Id
 
