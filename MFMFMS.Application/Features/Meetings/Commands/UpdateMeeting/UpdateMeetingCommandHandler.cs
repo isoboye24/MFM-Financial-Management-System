@@ -27,6 +27,7 @@ namespace MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting
             meeting.UpdateDate(request.Date);
             meeting.UpdateSummary(request.Summary);
             meeting.UpdateAttendance(request.NoOfMaleAttendance, request.NoOfFemaleAttendance, request.NoOfChildrenAttendance);
+            meeting.UpdateMeetingCategoryId(request.MeetingCategoryId);
 
             try
             {
