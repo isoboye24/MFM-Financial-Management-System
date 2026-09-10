@@ -10,6 +10,7 @@
         public int NoOfMaleAttendance { get; set; }
         public int NoOfFemaleAttendance { get; set; }
         public int NoOfChildrenAttendance { get; set; }
+        public Guid MeetingCategoryId { get; set; }
         public required string MeetingCategory { get; set; }
     }
 }
