@@ -1,6 +1,7 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
+using MFMFMS.Application.Features.Givings.Queries.GetGivingStatistics;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -79,6 +80,42 @@ namespace MFMFMS.Persistence.Repositories
                            .Include(x => x.Meeting)
                            .Include(x => x.Category)
                            .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<GivingStatisticsDTO> GetGivingStatistics()
+        {
+            var statistics = await _db.Givings
+                                    .Where(x => !x.IsDeleted)
+                                    .GroupBy(x => x.Category!.Name)
+                                    .Select(g => new
+                                    {
+                                        CategoryName = g.Key,
+                                        Total = g.Sum(x => x.Amount)
+                                    })
+                                    .ToListAsync();
+
+            return new GivingStatisticsDTO
+            {
+                TotalTithes = statistics
+                    .Where(x => x.CategoryName == "Tithe")
+                    .Select(x => x.Total)
+                    .FirstOrDefault(),
+
+                TotalOfferings = statistics
+                    .Where(x => x.CategoryName == "Offering")
+                    .Select(x => x.Total)
+                    .FirstOrDefault(),
+
+                TotalSeeds = statistics
+                    .Where(x => x.CategoryName == "Seed")
+                    .Select(x => x.Total)
+                    .FirstOrDefault(),
+
+                TotalOtherIncome = statistics
+                    .Where(x => x.CategoryName == "Other Income")
+                    .Select(x => x.Total)
+                    .FirstOrDefault()
+            };
         }
     }
 }
