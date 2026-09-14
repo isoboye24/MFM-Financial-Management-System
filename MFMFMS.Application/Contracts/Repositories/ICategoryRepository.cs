@@ -6,7 +6,7 @@ namespace MFMFMS.Application.Contracts.Repositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-        Task<bool> Exists(string name);
+        Task<bool> Exists(string name, bool isDeleted = false);
         Task<IEnumerable<Category>> GetFiltered(CategoriesFilterDTO filter);
 
         Task<IEnumerable<Category>> GetDeletedFiltered(DeletedCategoriesFilterDTO filter);

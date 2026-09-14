@@ -15,12 +15,13 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
-        public async Task<bool> Exists(string minister, DateTime date, Guid meetingCategoryId)
+        public async Task<bool> Exists(string minister, DateTime date, Guid meetingCategoryId, bool isDeleted = false)
         {
             var startOfDay = date.Date;
             var endOfDay = startOfDay.AddDays(1);
 
-            var exists = await _db.Meetings.Where(x => x.Minister == minister && x.Date >= startOfDay && x.Date < endOfDay && x.MeetingCategoryId == meetingCategoryId).AnyAsync();
+            var exists = await _db.Meetings.Where(x => x.Minister == minister && x.Date >= startOfDay && x.Date < endOfDay && x.MeetingCategoryId == meetingCategoryId 
+            && x.IsDeleted == isDeleted).AnyAsync();
 
             if (exists)
             {

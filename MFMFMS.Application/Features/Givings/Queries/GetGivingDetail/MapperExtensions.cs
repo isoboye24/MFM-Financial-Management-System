@@ -10,10 +10,13 @@ namespace MFMFMS.Application.Features.Givings.Queries.GetGivingDetail
             {
                 Id = giving.Id,
                 Amount = giving.Amount,
-                Date = giving.Date,
+                Date = giving.Meeting?.Date ?? default,
                 Summary = giving.Summary,
                 CategoryName = giving.Category?.Name ?? string.Empty,
                 MessageTitle = giving.Meeting?.MessageTitle ?? string.Empty,
+                Minister = giving.Meeting?.Minister ?? string.Empty,
+                MeetingId = giving.MeetingId,
+                CategoryId = giving.CategoryId
             };
         }
     }

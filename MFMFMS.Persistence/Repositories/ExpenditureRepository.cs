@@ -16,12 +16,12 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
-        public async Task<bool> Exists(string summary, DateTime date)
+        public async Task<bool> Exists(string summary, DateTime date, bool isDeleted = false)
         {
             var startOfDay = date.Date;
             var endOfDay = startOfDay.AddDays(1);
 
-            var exists = await _db.Expenditures.Where(x => x.Summary == summary && x.Date >= startOfDay && x.Date < endOfDay).AnyAsync();
+            var exists = await _db.Expenditures.Where(x => x.Summary == summary && x.Date >= startOfDay && x.Date < endOfDay && x.IsDeleted == isDeleted).AnyAsync();
 
             if (exists)
             {

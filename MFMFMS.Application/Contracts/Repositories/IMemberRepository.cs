@@ -6,7 +6,7 @@ namespace MFMFMS.Application.Contracts.Repositories
 {
     public interface IMemberRepository : IRepository<Member>
     {
-        Task<bool> Exists(string FirstName, string LastName, string PhoneNumber);
+        Task<bool> Exists(string FirstName, string LastName, string PhoneNumber, bool isDeleted = false);
         Task<IEnumerable<Member>> GetFiltered(MembersFilterDTO filter);
         Task<IEnumerable<Member>> GetDeletedFiltered(DeletedMembersFilterDTO filter);
         Task<Member?> GetMemberDetail(Guid id);

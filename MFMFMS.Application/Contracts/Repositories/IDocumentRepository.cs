@@ -6,7 +6,7 @@ namespace MFMFMS.Application.Contracts.Repositories
 {
     public interface IDocumentRepository : IRepository<Document>
     {
-        Task<bool> Exists(string name);
+        Task<bool> Exists(string name, bool isDeleted = false);
         Task<IEnumerable<Document>> GetFiltered(DocumentsFilterDTO filter);
         Task<IEnumerable<Document>> GetDeletedFiltered(DeletedDocumentsFilterDTO filter);
         Task<Document?> GetDocumentDetail(Guid id);

@@ -6,7 +6,7 @@ namespace MFMFMS.Application.Contracts.Repositories
 {
     public interface IPositionRepository : IRepository<Position>
     {
-        Task<bool> Exists(string name);
+        Task<bool> Exists(string name, bool isDeleted = false);
         Task<IEnumerable<Position>> GetFiltered(PositionFilterDTO filter);
 
         Task<IEnumerable<Position>> GetDeletedFiltered(DeletedPositionsFilterDTO filter);

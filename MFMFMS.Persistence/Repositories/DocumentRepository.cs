@@ -16,9 +16,9 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
-        public async Task<bool> Exists(string name)
+        public async Task<bool> Exists(string name, bool isDeleted = false)
         {
-            var exists = await _db.Documents.Where(x => x.Name == name).AnyAsync();
+            var exists = await _db.Documents.Where(x => x.Name == name && x.IsDeleted == isDeleted).AnyAsync();
 
             if (exists)
             {

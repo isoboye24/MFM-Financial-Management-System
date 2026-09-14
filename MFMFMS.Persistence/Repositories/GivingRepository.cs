@@ -15,9 +15,9 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
-        public async Task<bool> Exists(Guid meetingId, Guid categoryId)
+        public async Task<bool> Exists(Guid meetingId, Guid categoryId, bool isDeleted = false)
         {
-            var exists = await _db.Givings.Where(x => x.MeetingId == meetingId && x.CategoryId == categoryId).AnyAsync();
+            var exists = await _db.Givings.Where(x => x.MeetingId == meetingId && x.CategoryId == categoryId && x.IsDeleted == isDeleted).AnyAsync();
 
             if (exists)
             {
