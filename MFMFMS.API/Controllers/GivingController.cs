@@ -8,6 +8,7 @@ using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
+using MFMFMS.Application.Features.Givings.Queries.GetGivingStatistics;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -102,6 +103,14 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new PermanentDeleteGivingCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("statistics")]
+        public async Task<ActionResult<GivingStatisticsDTO>> GetStatistics()
+        {
+            var query = new GetGivingStatisticsQuery();
+
+            return await _mediator.Send(query);
         }
     }
 }
