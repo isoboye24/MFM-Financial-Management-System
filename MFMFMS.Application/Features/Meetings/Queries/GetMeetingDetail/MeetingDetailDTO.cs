@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
         public string MessageTitle { get; set; } = null!;
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
         public string? Summary { get; set; }
         public string Minister { get; set; } = null!;
         public int NoOfMaleAttendance { get; set; }

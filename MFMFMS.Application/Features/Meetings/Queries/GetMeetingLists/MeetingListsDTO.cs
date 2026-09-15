@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
         public required string MessageTitle { get; set; }
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
         public string? Summary { get; set; }
         public required string Minister { get; set; }
         public int NoOfMaleAttendance { get; set; }

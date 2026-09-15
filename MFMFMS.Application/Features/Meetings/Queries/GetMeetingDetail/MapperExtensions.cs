@@ -10,7 +10,7 @@ namespace MFMFMS.Application.Features.Meetings.Queries.GetMeetingDetail
             {
                 Id = meeting.Id,
                 MessageTitle = meeting.MessageTitle,
-                Date = meeting.Date,
+                Date = DateOnly.FromDateTime(meeting.Date),
                 Summary = meeting.Summary,
                 Minister = meeting.Minister,
                 NoOfMaleAttendance = meeting.NoOfMaleAttendance,

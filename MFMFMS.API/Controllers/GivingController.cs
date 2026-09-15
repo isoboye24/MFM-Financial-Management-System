@@ -5,10 +5,12 @@ using MFMFMS.Application.Features.Givings.Commands.DeleteGiving;
 using MFMFMS.Application.Features.Givings.Commands.PermanentDeleteGiving;
 using MFMFMS.Application.Features.Givings.Commands.RestoreGiving;
 using MFMFMS.Application.Features.Givings.Commands.UpdateGiving;
+using MFMFMS.Application.Features.Givings.Queries.GetAnnualGivingStatistics;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
-using MFMFMS.Application.Features.Givings.Queries.GetGivingStatistics;
+using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
+using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -105,10 +107,26 @@ namespace MFMFMS.API.Controllers
             return NoContent();
         }
 
-        [HttpGet("statistics")]
-        public async Task<ActionResult<GivingStatisticsDTO>> GetStatistics()
+        [HttpGet("total/statistics")]
+        public async Task<ActionResult<TotalGivingStatisticsDTO>> GetTotalStatistics()
         {
-            var query = new GetGivingStatisticsQuery();
+            var query = new GetTotalGivingStatisticsQuery();
+
+            return await _mediator.Send(query);
+        }
+
+        [HttpGet("annual/statistics")]
+        public async Task<ActionResult<AnnualGivingStatisticsDTO>> GetAnnualStatistics()
+        {
+            var query = new GetAnnualGivingStatisticsQuery();
+
+            return await _mediator.Send(query);
+        }
+
+        [HttpGet("monthly/statistics")]
+        public async Task<ActionResult<MonthlyGivingStatisticsDTO>> GetMonthlyStatistics()
+        {
+            var query = new GetMonthlyGivingStatisticsQuery();
 
             return await _mediator.Send(query);
         }

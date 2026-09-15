@@ -1,6 +1,6 @@
-﻿namespace MFMFMS.Application.Features.Givings.Queries.GetGivingStatistics
+﻿namespace MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics
 {
-    public class GivingStatisticsDTO
+    public class TotalGivingStatisticsDTO
     {
         public decimal TotalTithes { get; set; }
         public decimal TotalOfferings { get; set; }

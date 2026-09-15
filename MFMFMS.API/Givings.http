@@ -50,3 +50,21 @@ PUT {{Host}}/019ff619-85ac-7559-a0ab-068e0d67e15e/restore
 ### Permanently Delete by Id
 
 DELETE {{Host}}/019ff619-85ac-7559-a0ab-068e0d67e15e/permanent
+
+
+### Get monthly giving statistics
+
+GET {{Host}}/monthly/statistics
+Accept: application/json
+
+### Get annual giving statistics
+
+
+GET {{Host}}/annual/statistics
+Accept: application/json
+
+
+### Get total giving statistics
+
+GET {{Host}}/total/statistics
+Accept: application/json

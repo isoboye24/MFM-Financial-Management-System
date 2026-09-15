@@ -9,7 +9,7 @@ namespace MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists
             return new MeetingListsDTO
             {
                 Id = meeting.Id,
-                Date = meeting.Date,
+                Date = DateOnly.FromDateTime(meeting.Date),
                 Summary = meeting.Summary,
                 MessageTitle = meeting.MessageTitle,
                 Minister = meeting.Minister,
