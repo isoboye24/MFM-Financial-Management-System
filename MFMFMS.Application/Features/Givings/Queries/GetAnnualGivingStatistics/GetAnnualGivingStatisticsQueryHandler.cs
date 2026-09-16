@@ -14,9 +14,7 @@ namespace MFMFMS.Application.Features.Givings.Queries.GetAnnualGivingStatistics
 
         public async Task<AnnualGivingStatisticsDTO> Handle(GetAnnualGivingStatisticsQuery request)
         {
-            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
-
-            return await _repository.GetAnnualGivingStatistics(currentDate.Year);
+            return await _repository.GetAnnualGivingStatistics(request.Year);
         }
     }
 }

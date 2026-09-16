@@ -54,13 +54,13 @@ DELETE {{Host}}/019ff619-85ac-7559-a0ab-068e0d67e15e/permanent
 
 ### Get monthly giving statistics
 
-GET {{Host}}/monthly/statistics
+GET {{Host}}/monthly/statistics?month=8&year=2026
 Accept: application/json
+
 
 ### Get annual giving statistics
 
-
-GET {{Host}}/annual/statistics
+GET {{Host}}/annual/statistics?year=2026
 Accept: application/json
 
 

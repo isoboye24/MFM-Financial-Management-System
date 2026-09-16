@@ -116,18 +116,14 @@ namespace MFMFMS.API.Controllers
         }
 
         [HttpGet("annual/statistics")]
-        public async Task<ActionResult<AnnualGivingStatisticsDTO>> GetAnnualStatistics()
-        {
-            var query = new GetAnnualGivingStatisticsQuery();
-
+        public async Task<ActionResult<AnnualGivingStatisticsDTO>> GetAnnualStatistics([FromQuery] GetAnnualGivingStatisticsQuery query)
+        {            
             return await _mediator.Send(query);
         }
 
         [HttpGet("monthly/statistics")]
-        public async Task<ActionResult<MonthlyGivingStatisticsDTO>> GetMonthlyStatistics()
+        public async Task<ActionResult<MonthlyGivingStatisticsDTO>> GetMonthlyStatistics([FromQuery] GetMonthlyGivingStatisticsQuery query)
         {
-            var query = new GetMonthlyGivingStatisticsQuery();
-
             return await _mediator.Send(query);
         }
     }

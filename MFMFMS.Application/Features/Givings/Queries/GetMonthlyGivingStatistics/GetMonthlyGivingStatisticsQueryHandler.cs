@@ -14,9 +14,7 @@ namespace MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics
 
         public async Task<MonthlyGivingStatisticsDTO> Handle(GetMonthlyGivingStatisticsQuery request)
         {
-            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
-
-            return await _repository.GetMonthlyGivingStatistics(currentDate.Month, currentDate.Year);
+            return await _repository.GetMonthlyGivingStatistics(request.Month, request.Year);
         }
     }
 }
