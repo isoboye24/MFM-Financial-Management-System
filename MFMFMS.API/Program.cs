@@ -10,6 +10,11 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(7200);
+});
+
 Env.TraversePath().Load();
 
 // Add services to the container.
@@ -48,11 +53,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseCustomExceptionHandler();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseAuthorization();
 
 app.MapControllers();

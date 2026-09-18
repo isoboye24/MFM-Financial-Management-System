@@ -2,6 +2,7 @@
 using MFMFMS.Application.Features.Givings.Queries.GetAnnualGivingStatistics;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
+using MFMFMS.Application.Features.Givings.Queries.GetGivingListsByMonthAndYear;
 using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
 using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Domain.Entities;
@@ -190,6 +191,49 @@ namespace MFMFMS.Persistence.Repositories
                     .Select(x => x.Total)
                     .FirstOrDefault()
             };
+        }
+
+        public async Task<IEnumerable<Giving>> GetFilteredByMonthAndYear(GivingListsByMonthAndYearFilterDTO filter)
+        {
+            var query = _db.Givings.Where(x => !x.IsDeleted).AsQueryable();
+
+            if (filter.MeetingId.HasValue)
+            {
+                query = query.Where(x =>
+                    x.MeetingId == filter.MeetingId.Value);
+            }
+
+            if (filter.CategoryId.HasValue)
+            {
+                query = query.Where(x =>
+                    x.CategoryId == filter.CategoryId.Value);
+            }
+
+            if (filter.Month.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Date.Month == filter.Month.Value);
+            }
+
+            if (filter.Year.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Date.Year == filter.Year.Value);
+            }
+
+            if (filter.MeetingCategoryId.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Meeting.MeetingCategoryId == filter.MeetingCategoryId.Value);
+            }
+
+            return await query
+                .Include(x => x.Category)
+                .Include(x => x.Meeting)
+                .Include(x => x.Meeting.MeetingCategory)
+                .OrderByDescending(x => x.Date)
+                .Paginate(filter.Page, filter.RecordsPerPage)
+                .ToListAsync();
         }
     }
 }

@@ -1,4 +1,4 @@
-@Host = https://localhost:7002/api/positions
+@Host = http://192.168.0.195:7200/api/positions
 
 ### Insert
 
