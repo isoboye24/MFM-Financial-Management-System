@@ -9,6 +9,7 @@ using MFMFMS.Application.Features.Givings.Queries.GetAnnualGivingStatistics;
 using MFMFMS.Application.Features.Givings.Queries.GetDeletedGivingLists;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingDetail;
 using MFMFMS.Application.Features.Givings.Queries.GetGivingLists;
+using MFMFMS.Application.Features.Givings.Queries.GetGivingListsByMonthAndYear;
 using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
 using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Application.Utilities;
@@ -125,6 +126,16 @@ namespace MFMFMS.API.Controllers
         public async Task<ActionResult<MonthlyGivingStatisticsDTO>> GetMonthlyStatistics([FromQuery] GetMonthlyGivingStatisticsQuery query)
         {
             return await _mediator.Send(query);
+        }
+
+        [HttpGet("by-month-year")]
+        public async Task<ActionResult<List<GivingListsByMonthAndYearDTO>>> GetByMonthAndYear([FromQuery] GetGivingListsByMonthAndYearQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+
+            return result.Items;
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using MFMFMS.Application.Utilities;
+using MFMFMS.Application.Utilities.Common;
 
 namespace MFMFMS.Application.Features.Givings.Queries.GetGivingListsByMonthAndYear
 {
-    public class GetGivingListsByMonthAndYearQuery : IRequest<List<GivingListsByMonthAndYearDTO>>
+    public class GetGivingListsByMonthAndYearQuery : GivingListsByMonthAndYearFilterDTO, IRequest<PaginatedDTO<GivingListsByMonthAndYearDTO>>
     {
     }
 }

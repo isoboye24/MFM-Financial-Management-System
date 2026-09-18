@@ -8,9 +8,12 @@
         public Guid Id { get; set; }
         public decimal? Amount { get; set; }
         public DateTime? Date { get; set; }
-        public Guid? CategoryId { get; set; }
-        public Guid? MeetingCategoryId { get; set; }
-        public Guid? MeetingId { get; set; }
+
+        public Guid CategoryId { get; set; }
+        public string? CategoryName { get; set; }
+
+        public Guid MeetingCategoryId { get; set; }
+        public Guid MeetingId { get; set; }
 
         public int? Month { get; set; }
         public int? Year { get; set; }

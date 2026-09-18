@@ -197,18 +197,6 @@ namespace MFMFMS.Persistence.Repositories
         {
             var query = _db.Givings.Where(x => !x.IsDeleted).AsQueryable();
 
-            if (filter.MeetingId.HasValue)
-            {
-                query = query.Where(x =>
-                    x.MeetingId == filter.MeetingId.Value);
-            }
-
-            if (filter.CategoryId.HasValue)
-            {
-                query = query.Where(x =>
-                    x.CategoryId == filter.CategoryId.Value);
-            }
-
             if (filter.Month.HasValue)
             {
                 query = query.Where(x =>
@@ -221,16 +209,18 @@ namespace MFMFMS.Persistence.Repositories
                     x.Date.Year == filter.Year.Value);
             }
 
-            if (filter.MeetingCategoryId.HasValue)
+            if (!string.IsNullOrWhiteSpace(filter.CategoryName))
             {
                 query = query.Where(x =>
-                    x.Meeting.MeetingCategoryId == filter.MeetingCategoryId.Value);
+                    x.Category != null &&
+                    x.Category.Name == filter.CategoryName);
             }
+
 
             return await query
                 .Include(x => x.Category)
                 .Include(x => x.Meeting)
-                .Include(x => x.Meeting.MeetingCategory)
+                .Include(x => x.Meeting!.MeetingCategory)
                 .OrderByDescending(x => x.Date)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
