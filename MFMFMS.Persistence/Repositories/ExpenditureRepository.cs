@@ -1,6 +1,7 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
 using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
+using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +60,28 @@ namespace MFMFMS.Persistence.Repositories
 
             return await query
                 .OrderBy(x => x.Summary)
+                .Paginate(filter.Page, filter.RecordsPerPage)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Expenditure>> GetFilteredByMonthAndYear(ExpenditureListsByMonthAndYearFilterDTO filter)
+        {
+            var query = _db.Expenditures.Where(x => !x.IsDeleted).AsQueryable();
+
+            if (filter.Month.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Date.Month == filter.Month.Value);
+            }
+
+            if (filter.Year.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Date.Year == filter.Year.Value);
+            }
+
+            return await query                
+                .OrderByDescending(x => x.Date)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
         }

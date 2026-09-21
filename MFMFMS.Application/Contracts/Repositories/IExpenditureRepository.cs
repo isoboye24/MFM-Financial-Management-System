@@ -1,5 +1,6 @@
 ﻿using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
+using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
 using MFMFMS.Domain.Entities;
 
 namespace MFMFMS.Application.Contracts.Repositories
@@ -10,5 +11,7 @@ namespace MFMFMS.Application.Contracts.Repositories
         Task<IEnumerable<Expenditure>> GetFiltered(ExpendituresFilterDTO filter);
 
         Task<IEnumerable<Expenditure>> GetDeletedFiltered(DeletedExpendituresFilterDTO filter);
+
+        Task<IEnumerable<Expenditure>> GetFilteredByMonthAndYear(ExpenditureListsByMonthAndYearFilterDTO filter);
     }
 }
