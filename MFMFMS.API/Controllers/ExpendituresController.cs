@@ -5,10 +5,16 @@ using MFMFMS.Application.Features.Expenditures.Commands.DeleteExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.PermanentDeleteExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.RestoreExpenditure;
 using MFMFMS.Application.Features.Expenditures.Commands.UpdateExpenditure;
+using MFMFMS.Application.Features.Expenditures.Queries.GetAnnualExpenditureStatistics;
 using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureDetail;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
+using MFMFMS.Application.Features.Expenditures.Queries.GetMonthlyExpendituresStatistics;
+using MFMFMS.Application.Features.Expenditures.Queries.GetTotalExpenditureStatistics;
+using MFMFMS.Application.Features.Givings.Queries.GetAnnualGivingStatistics;
+using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
+using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -108,6 +114,24 @@ namespace MFMFMS.API.Controllers
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
 
             return result.Items;
+        }
+
+        [HttpGet("total/statistics")]
+        public async Task<ActionResult<TotalExpendituresStatisticsDTO>> GetTotalStatistics([FromQuery] GetTotalExpendituresStatisticsQuery query)
+        {
+            return await _mediator.Send(query);
+        }
+
+        [HttpGet("annual/statistics")]
+        public async Task<ActionResult<AnnualExpendituresStatisticsDTO>> GetAnnualStatistics([FromQuery] GetAnnualExpendituresStatisticsQuery query)
+        {
+            return await _mediator.Send(query);
+        }
+
+        [HttpGet("monthly/statistics")]
+        public async Task<ActionResult<MonthlyExpendituresStatisticsDTO>> GetMonthlyStatistics([FromQuery] GetMonthlyExpendituresStatisticsQuery query)
+        {
+            return await _mediator.Send(query);
         }
     }
 }

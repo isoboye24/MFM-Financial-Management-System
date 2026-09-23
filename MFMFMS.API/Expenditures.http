@@ -52,3 +52,21 @@ DELETE {{Host}}/019fe627-8051-7320-9fa7-7d2595b0dd97/permanent
 ### Get by month and year
 
 GET {{Host}}/by-month-year?month=9&year=2026
+
+
+### Get monthly expenditures statistics
+
+GET {{Host}}/monthly/statistics?month=9&year=2026
+Accept: application/json
+
+
+### Get annual expenditures statistics
+
+GET {{Host}}/annual/statistics?year=2026
+Accept: application/json
+
+
+### Get total expenditures statistics
+
+GET {{Host}}/total/statistics
+Accept: application/json

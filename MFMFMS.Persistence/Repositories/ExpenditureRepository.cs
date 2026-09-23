@@ -1,7 +1,11 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
+using MFMFMS.Application.Features.Expenditures.Queries.GetAnnualExpenditureStatistics;
 using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
+using MFMFMS.Application.Features.Expenditures.Queries.GetMonthlyExpendituresStatistics;
+using MFMFMS.Application.Features.Expenditures.Queries.GetTotalExpenditureStatistics;
+using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -84,6 +88,33 @@ namespace MFMFMS.Persistence.Repositories
                 .OrderByDescending(x => x.Date)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
+        }
+
+        public async Task<MonthlyExpendituresStatisticsDTO> GetMonthlyExpenditureStatistics(int month, int year)
+        {
+            var amount = await _db.Expenditures
+                                    .Where(x => !x.IsDeleted && x.Date.Month == month && x.Date.Year == year)
+                                    .SumAsync(x => x.Amount);
+
+            return amount == 0 ? new MonthlyExpendituresStatisticsDTO { MonthlyExpenditures = 0 } : new MonthlyExpendituresStatisticsDTO { MonthlyExpenditures = amount };
+        }
+
+        public async Task<AnnualExpendituresStatisticsDTO> GetAnnualExpenditureStatistics(int year)
+        {
+            var amount = await _db.Expenditures
+                                    .Where(x => !x.IsDeleted && x.Date.Year == year)
+                                    .SumAsync(x => x.Amount);
+
+            return amount == 0 ? new AnnualExpendituresStatisticsDTO { AnnualExpenditures = 0 } : new AnnualExpendituresStatisticsDTO { AnnualExpenditures = amount };
+        }
+
+        public async Task<TotalExpendituresStatisticsDTO> GetTotalExpenditureStatistics()
+        {
+            var amount = await _db.Expenditures
+                                    .Where(x => !x.IsDeleted)
+                                    .SumAsync(x => x.Amount);
+
+            return amount == 0 ? new TotalExpendituresStatisticsDTO { TotalExpenditures = 0 } : new TotalExpendituresStatisticsDTO { TotalExpenditures = amount };
         }
     }
 }
