@@ -47,3 +47,8 @@ PUT {{Host}}/019fe627-8051-7320-9fa7-7d2595b0dd97/restore
 ### Permanently Delete by Id
 
 DELETE {{Host}}/019fe627-8051-7320-9fa7-7d2595b0dd97/permanent
+
+
+### Get by month and year
+
+GET {{Host}}/by-month-year?month=9&year=2026

@@ -8,6 +8,7 @@ using MFMFMS.Application.Features.Expenditures.Commands.UpdateExpenditure;
 using MFMFMS.Application.Features.Expenditures.Queries.GetDeletedExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureDetail;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
+using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -97,6 +98,16 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new PermanentDeleteExpenditureCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("by-month-year")]
+        public async Task<ActionResult<List<ExpenditureListsByMonthAndYearDTO>>> GetByMonthAndYear([FromQuery] GetExpenditureListsByMonthAndYearDTOQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+
+            return result.Items;
         }
     }
 }
