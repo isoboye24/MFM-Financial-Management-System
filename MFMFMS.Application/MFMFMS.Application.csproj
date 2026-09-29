@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FinancialSummaryMonthlyReport\Commands\" />
     <Folder Include="Notifications\" />
   </ItemGroup>
 

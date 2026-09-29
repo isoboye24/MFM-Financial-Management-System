@@ -1,5 +1,5 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
-using MFMFMS.Application.Features.FinancialSummaryMonthlyReport.Queries.GetFinancialSummaryMonthlyReportLists;
+using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportLists;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;

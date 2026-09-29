@@ -1,4 +1,4 @@
-﻿using MFMFMS.Application.Features.FinancialSummaryMonthlyReport.Queries.GetFinancialSummaryMonthlyReportLists;
+﻿using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportLists;
 using MFMFMS.Domain.Entities;
 
 namespace MFMFMS.Application.Contracts.Repositories

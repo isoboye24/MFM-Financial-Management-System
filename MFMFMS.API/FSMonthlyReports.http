@@ -1,0 +1,54 @@
+@Host = http://192.168.0.195:7200/api/financial-summary-monthly-reports
+
+### Insert
+
+Post {{Host}}
+Content-type: application/json
+{
+  "month": 9,
+  "year": 2026,
+  "openingBalance": 1500
+}
+
+### Get All
+
+GET {{Host}}
+Accept: application/json
+
+### Get All Deleted
+
+GET {{Host}}/deleted
+Accept: application/json
+
+
+### Search by Id
+
+GET {{Host}}/019fe83d-9234-7a08-b2f4-0ac2b710e3ff
+ACCEPT: application/json
+
+### Update by Id
+
+PUT {{Host}}/019fe827-9fdb-7e9e-8041-b5a06c836118
+Content-type: application/json
+{
+  
+  "date": "2024-06-01T10:00:00",
+  "summary": "Bible Studies",
+  "messageTitle": "Prayer",
+  "minister": "John Doe",
+  "noOfMaleAttendance": 10,
+  "noOfFemaleAttendance": 4,
+  "noOfChildrenAttendance": 2
+}
+
+### Temporarily Delete by Id
+
+DELETE {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9
+
+### Restore by Id
+
+PUT {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9/restore
+
+### Permanently Delete by Id
+
+DELETE {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9/permanent
