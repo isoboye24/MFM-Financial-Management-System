@@ -18,17 +18,17 @@ Accept: application/json
 
 ### Search by Id
 
-GET {{Host}}/01a0f1c6-8a90-706e-92d6-8f48fac62846
+GET {{Host}}/01a0ef74-2c29-7d75-b91b-1f5f1e60e729
 ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fe827-9fdb-7e9e-8041-b5a06c836118
+PUT {{Host}}/01a0ef74-2c29-7d75-b91b-1f5f1e60e729
 Content-type: application/json
 {  
   "month": 9,
   "year": 2026,
-  "openingBalance": 1500
+  "openingBalance": 590
 }
 
 ### Permanently Delete by Id

@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.FinancialSummaryMonthlyReports;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.CreateFSMonthlyReports;
+using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.UpdateFSMonthlyReports;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportDetail;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportLists;
 using MFMFMS.Application.Utilities;
@@ -44,6 +45,21 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetFinancialSummaryMonthlyReportDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateFinancialSummaryMonthlyReportsDTO updateReportDTO)
+        {
+            var command = new UpdateFSMonthlyReportsCommand
+            {
+                Id = id,
+                Month = updateReportDTO.Month,
+                Year = updateReportDTO.Year,
+                OpeningBalance = updateReportDTO.OpeningBalance               
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
         }
     }
 }

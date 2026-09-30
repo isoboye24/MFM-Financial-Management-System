@@ -60,12 +60,29 @@ namespace MFMFMS.Domain.Entities
             }
         }
 
+        public void UpdateDate(int year, int month)
+        {
+            ValidateDate(year, month);
+
+            Year = year;
+            Month = month;
+        }
+
         private static void ValidateOpeningBalance(decimal openingBalance)
         {
             if (openingBalance < 0)
             {
                 throw new BusinessRuleException("Opening balance cannot be negative.");
             }
+        }
+
+        public void UpdateOpeningBalance(decimal openingBalance)
+        {
+            ValidateOpeningBalance(openingBalance);
+
+            OpeningBalance = openingBalance;
+
+            GetClosingBalance();
         }
 
         public void SetTotals(decimal totalIncome, decimal totalExpenditure)
@@ -82,15 +99,6 @@ namespace MFMFMS.Domain.Entities
 
             TotalIncome = totalIncome;
             TotalExpenditure = totalExpenditure;
-
-            GetClosingBalance();
-        }
-
-        public void UpdateOpeningBalance( decimal openingBalance)
-        {
-            ValidateOpeningBalance(openingBalance);
-
-            OpeningBalance = openingBalance;
 
             GetClosingBalance();
         }
