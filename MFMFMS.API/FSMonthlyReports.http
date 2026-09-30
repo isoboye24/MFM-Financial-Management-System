@@ -33,4 +33,4 @@ Content-type: application/json
 
 ### Permanently Delete by Id
 
-DELETE {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9/permanent
+DELETE {{Host}}/01a0f1f4-0151-77aa-9a4e-5d9b944afe26/permanent

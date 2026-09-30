@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.FinancialSummaryMonthlyReports;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.CreateFSMonthlyReports;
+using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.DeleteFSMonthlyReportsPermanently;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.UpdateFSMonthlyReports;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportDetail;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportLists;
@@ -59,6 +60,13 @@ namespace MFMFMS.API.Controllers
             };
 
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new PermanentDeleteFSMonthlyReportCommand { Id = id });
             return NoContent();
         }
     }
