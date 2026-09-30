@@ -1,5 +1,7 @@
 ﻿using MFMFMS.API.DTOs.FinancialSummaryMonthlyReports;
+using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.CreateFSMonthlyReports;
+using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +28,14 @@ namespace MFMFMS.API.Controllers
             };
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<FinancialSummaryMonthlyReportListsDTO>>> GetAll([FromQuery] GetFinancialSummaryMonthlyReportListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
