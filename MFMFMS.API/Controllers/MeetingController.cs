@@ -8,6 +8,7 @@ using MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting;
 using MFMFMS.Application.Features.Meetings.Queries.GetDeletedMeetingLists;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingDetail;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists;
+using MFMFMS.Application.Features.Meetings.Queries.GetMeetingListsByMonthAndYear;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -107,6 +108,17 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new PermanentDeleteMeetingCommand { Id = id });
             return NoContent();
+        }
+
+
+        [HttpGet("by-month-year")]
+        public async Task<ActionResult<List<MeetingListsByMonthAndYearDTO>>> GetByMonthAndYear([FromQuery] GetMeetingListsByMonthAndYearDTOQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+
+            return result.Items;
         }
     }
 }

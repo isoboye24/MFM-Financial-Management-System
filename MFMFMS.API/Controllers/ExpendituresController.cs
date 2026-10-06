@@ -12,9 +12,6 @@ using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
 using MFMFMS.Application.Features.Expenditures.Queries.GetMonthlyExpendituresStatistics;
 using MFMFMS.Application.Features.Expenditures.Queries.GetTotalExpenditureStatistics;
-using MFMFMS.Application.Features.Givings.Queries.GetAnnualGivingStatistics;
-using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
-using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 

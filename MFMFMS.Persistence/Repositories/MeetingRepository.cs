@@ -1,6 +1,7 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
 using MFMFMS.Application.Features.Meetings.Queries.GetDeletedMeetingLists;
 using MFMFMS.Application.Features.Meetings.Queries.GetMeetingLists;
+using MFMFMS.Application.Features.Meetings.Queries.GetMeetingListsByMonthAndYear;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,29 @@ namespace MFMFMS.Persistence.Repositories
             if (!string.IsNullOrWhiteSpace(filter.MessageTitle))
             {
                 query = query.Where(p => p.MessageTitle.Contains(filter.MessageTitle));
+            }
+
+            return await query
+                .Include(x => x.MeetingCategory)
+                .OrderByDescending(x => x.Date)
+                .Paginate(filter.Page, filter.RecordsPerPage)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Meeting>> GetFilteredByMonthAndYear(MeetingListsByMonthAndYearFilterDTO filter)
+        {
+            var query = _db.Meetings.Where(x => !x.IsDeleted).AsQueryable();
+
+            if (filter.Month.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Date.Month == filter.Month.Value);
+            }
+
+            if (filter.Year.HasValue)
+            {
+                query = query.Where(x =>
+                    x.Date.Year == filter.Year.Value);
             }
 
             return await query
