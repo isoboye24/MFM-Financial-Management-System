@@ -5,6 +5,7 @@ using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.Delete
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.UpdateFSMonthlyReports;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportDetail;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportLists;
+using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Queries.GetFinancialSummaryMonthlyReportPDF;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -69,5 +70,17 @@ namespace MFMFMS.API.Controllers
             await _mediator.Send(new PermanentDeleteFSMonthlyReportCommand { Id = id });
             return NoContent();
         }
+
+        [HttpGet("{id}/pdf-data")]
+        public async Task<ActionResult<FinancialSummaryMonthlyReportPDFDTO>> GetPDFData(Guid id)
+        {
+            var query = new GetFinancialSummaryMonthlyReportPDFQuery
+            {
+                Id = id
+            };
+
+            return await _mediator.Send(query);
+        }
+
     }
 }
