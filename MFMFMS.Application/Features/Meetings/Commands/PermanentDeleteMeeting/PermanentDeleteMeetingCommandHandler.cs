@@ -9,10 +9,12 @@ namespace MFMFMS.Application.Features.Meetings.Commands.PermanentDeleteMeeting
     {
         private readonly IMeetingRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        public PermanentDeleteMeetingCommandHandler(IMeetingRepository repository, IUnitOfWork unitOfWork)
+        private readonly IGivingRepository _givingRepository;
+        public PermanentDeleteMeetingCommandHandler(IMeetingRepository repository, IUnitOfWork unitOfWork, IGivingRepository givingRepository)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+            _givingRepository = givingRepository;
         }
 
         public async Task Handle(PermanentDeleteMeetingCommand request)
@@ -26,6 +28,13 @@ namespace MFMFMS.Application.Features.Meetings.Commands.PermanentDeleteMeeting
 
             try
             {
+                var givings = await _givingRepository.GetByMeetingId(meeting.Id);
+
+                foreach (var giving in givings)
+                {
+                    await _givingRepository.DeletePermanently(giving);
+                }
+
                 await _repository.DeletePermanently(meeting);
                 await _unitOfWork.Commit();
             }

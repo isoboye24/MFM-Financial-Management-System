@@ -85,6 +85,11 @@ namespace MFMFMS.Persistence.Repositories
                            .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<Giving>> GetByMeetingId(Guid meetingId)
+        {
+            return await _db.Givings.Where(x => x.MeetingId == meetingId).ToListAsync();
+        }
+
         public async Task<MonthlyGivingStatisticsDTO> GetMonthlyGivingStatistics(int month, int year)
         {
             var statistics = await _db.Givings

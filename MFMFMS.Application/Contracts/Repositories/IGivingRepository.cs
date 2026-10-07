@@ -16,6 +16,8 @@ namespace MFMFMS.Application.Contracts.Repositories
         Task<IEnumerable<Giving>> GetDeletedFiltered(DeletedGivingsFilterDTO filter);
         Task<Giving?> GetGivingDetail(Guid id);
 
+        Task<IEnumerable<Giving>> GetByMeetingId(Guid meetingId);
+
         Task<TotalGivingStatisticsDTO> GetTotalGivingStatistics();
         Task<MonthlyGivingStatisticsDTO> GetMonthlyGivingStatistics(int month, int year);
         Task<AnnualGivingStatisticsDTO> GetAnnualGivingStatistics(int year);

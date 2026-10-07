@@ -9,11 +9,13 @@ namespace MFMFMS.Application.Features.Meetings.Commands.RestoreMeeting
     {
         private readonly IMeetingRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IGivingRepository _givingRepository;
 
-        public RestoreMeetingCommandHandler(IMeetingRepository repository, IUnitOfWork unitOfWork)
+        public RestoreMeetingCommandHandler(IMeetingRepository repository, IUnitOfWork unitOfWork, IGivingRepository givingRepository)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+            _givingRepository = givingRepository;
         }
 
         public async Task Handle(RestoreMeetingCommand request)
@@ -27,6 +29,13 @@ namespace MFMFMS.Application.Features.Meetings.Commands.RestoreMeeting
 
             try
             {
+                var givings = await _givingRepository.GetByMeetingId(meeting.Id);
+
+                foreach (var giving in givings)
+                {
+                    await _givingRepository.Restore(giving);
+                }
+
                 await _repository.Restore(meeting);
                 await _unitOfWork.Commit();
             }
