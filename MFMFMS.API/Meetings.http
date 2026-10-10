@@ -48,11 +48,11 @@ Content-type: application/json
 
 ### Temporarily Delete by Id
 
-DELETE {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9
+DELETE {{Host}}/01a07e1b-3a4f-7108-8bdc-7f1a015474f2
 
 ### Restore by Id
 
-PUT {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9/restore
+PUT {{Host}}/01a07e1b-3a4f-7108-8bdc-7f1a015474f2/restore
 
 ### Permanently Delete by Id
 

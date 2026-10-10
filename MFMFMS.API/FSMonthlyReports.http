@@ -33,9 +33,9 @@ Content-type: application/json
 
 ### Permanently Delete by Id
 
-DELETE {{Host}}/01a0f1f4-0151-77aa-9a4e-5d9b944afe26/permanent
+DELETE {{Host}}/01a115d8-b2ca-7783-bd75-46d7ded8b13c/permanent
 
 
 ### Monthly PDF by Id
 
-GET {{Host}}/01a1157b-2497-7c44-aec0-f502ea44b5bc/pdf-data
+GET {{Host}}/01a115df-0006-7bc7-a8f6-08f078fe21b2/pdf-data
