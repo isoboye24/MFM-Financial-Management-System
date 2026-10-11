@@ -1,5 +1,6 @@
 ﻿using MFMFMS.API.DTOs.FinancialSummaryMonthlyReports;
 using MFMFMS.API.Utilities;
+using MFMFMS.Application.Contracts.PDF;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.CreateFSMonthlyReports;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.DeleteFSMonthlyReportsPermanently;
 using MFMFMS.Application.Features.FinancialSummaryMonthlyReports.Commands.UpdateFSMonthlyReports;
@@ -16,9 +17,12 @@ namespace MFMFMS.API.Controllers
     public class FinancialSummaryMonthlyReportController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public FinancialSummaryMonthlyReportController(IMediator mediator)
+        private readonly IMonthlyServiceReportPdfGenerator _pdfGenerator;
+
+        public FinancialSummaryMonthlyReportController(IMediator mediator, IMonthlyServiceReportPdfGenerator pdfGenerator)
         {
             _mediator = mediator;
+            _pdfGenerator = pdfGenerator;
         }
 
         [HttpPost]
@@ -80,6 +84,24 @@ namespace MFMFMS.API.Controllers
             };
 
             return await _mediator.Send(query);
+        }
+
+        [HttpGet("{id:guid}/pdf")]
+        [Produces("application/pdf")]
+        public async Task<IActionResult> GetPDF(Guid id)
+        {
+            var query = new GetFinancialSummaryMonthlyReportPDFQuery
+            {
+                Id = id
+            };
+
+            var report = await _mediator.Send(query);
+
+            var pdfBytes = _pdfGenerator.Generate(report);
+
+            var fileName = $"ServiceReport_{report.Year}_{report.Month:D2}.pdf";
+
+            return File(pdfBytes, "application/pdf", fileName);
         }
 
     }

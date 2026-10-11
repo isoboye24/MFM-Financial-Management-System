@@ -38,4 +38,8 @@ DELETE {{Host}}/01a115d8-b2ca-7783-bd75-46d7ded8b13c/permanent
 
 ### Monthly PDF by Id
 
-GET {{Host}}/01a115df-0006-7bc7-a8f6-08f078fe21b2/pdf-data
+GET {{Host}}/01A115DF-0006-7BC7-A8F6-08F078FE21B2/pdf-data
+
+### PDF template by Id
+
+GET {{Host}}/01A115DF-0006-7BC7-A8F6-08F078FE21B2/pdf

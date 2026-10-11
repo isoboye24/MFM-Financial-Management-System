@@ -1,12 +1,17 @@
 using DotNetEnv;
 using MFMFMS.API.Middleware;
 using MFMFMS.Application;
+using MFMFMS.Infrastructure;
 using MFMFMS.Persistence;
 using MFMFMS.Security;
 using MFMFMS.Security.Models;
 using MFMFMS.Security.Seed;
 using Microsoft.AspNetCore.Identity;
+using QuestPDF.Infrastructure;
 using System.Text.Json.Serialization;
+
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +38,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddSecurityServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
