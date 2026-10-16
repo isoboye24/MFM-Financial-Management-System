@@ -82,6 +82,7 @@ namespace MFMFMS.Persistence.Repositories
             return await _db.Givings
                            .Include(x => x.Meeting)
                            .Include(x => x.Category)
+                           .Include(x => x.Meeting!.MeetingCategory)
                            .FirstOrDefaultAsync(x => x.Id == id);
         }
 

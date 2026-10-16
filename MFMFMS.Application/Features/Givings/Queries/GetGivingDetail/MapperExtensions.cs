@@ -15,6 +15,7 @@ namespace MFMFMS.Application.Features.Givings.Queries.GetGivingDetail
                 CategoryName = giving.Category?.Name ?? string.Empty,
                 MessageTitle = giving.Meeting?.MessageTitle ?? string.Empty,
                 Minister = giving.Meeting?.Minister ?? string.Empty,
+                MeetingCategoryName = giving.Meeting?.MeetingCategory?.Name ?? string.Empty,
                 MeetingId = giving.MeetingId,
                 CategoryId = giving.CategoryId,
                 NoOfMaleAttendance = giving.Meeting?.NoOfMaleAttendance ?? 0,

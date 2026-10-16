@@ -11,6 +11,7 @@ namespace MFMFMS.Application.Features.Givings.Queries.GetGivingListsByMonthAndYe
                 Id = giving.Id,
                 Amount = giving.Amount,
                 Date = giving.Date,
+                Summary = giving.Summary,
                 CategoryId = giving.CategoryId,
                 CategoryName = giving.Category?.Name ?? string.Empty,
                 MeetingId = giving.MeetingId,
