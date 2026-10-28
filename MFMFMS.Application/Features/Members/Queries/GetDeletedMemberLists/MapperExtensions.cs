@@ -14,6 +14,7 @@ namespace MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists
                 Address = member.Address,
                 PhoneNumber = member.PhoneNumber,
                 PositionName = member.Position?.Name ?? string.Empty,
+                GenderName = member.Gender?.Name ?? string.Empty,
                 DeletedAt = member.DeletedAt ?? DateTime.MinValue
             };
         }
