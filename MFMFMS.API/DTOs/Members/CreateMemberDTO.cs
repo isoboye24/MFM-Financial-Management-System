@@ -7,5 +7,6 @@
         public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
         public required Guid PositionId { get; set; }
+        public required Guid GenderId { get; set; }
     }
 }

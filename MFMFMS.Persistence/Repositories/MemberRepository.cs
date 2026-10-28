@@ -57,8 +57,14 @@ namespace MFMFMS.Persistence.Repositories
             {
                 query = query.Where(p => p.PositionId == filter.PositionId);
             }
+            
+            if (filter.GenderId != Guid.Empty)
+            {
+                query = query.Where(p => p.GenderId == filter.GenderId);
+            }
 
             return await query
+                .Include(x => x.Gender)
                 .Include(x => x.Position)
                 .OrderBy(x => x.FirstName)
                 .Paginate(filter.Page, filter.RecordsPerPage)
@@ -93,8 +99,13 @@ namespace MFMFMS.Persistence.Repositories
             {
                 query = query.Where(p => p.PositionId == filter.PositionId.Value);
             }
+            if (filter.GenderId != Guid.Empty)
+            {
+                query = query.Where(p => p.GenderId == filter.GenderId);
+            }
 
             return await query
+                .Include(x => x.Gender)
                 .Include(x => x.Position)
                 .OrderBy(x => x.FirstName)
                 .Paginate(filter.Page, filter.RecordsPerPage)

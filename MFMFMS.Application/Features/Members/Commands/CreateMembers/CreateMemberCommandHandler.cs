@@ -26,7 +26,7 @@ namespace MFMFMS.Application.Features.Members.Commands.CreateMembers
             }
             else
             {
-                var member = new Member(request.FirstName, request.LastName, request.Address, request.PhoneNumber, request.PositionId);
+                var member = new Member(request.FirstName, request.LastName, request.Address, request.PhoneNumber, request.PositionId, request.GenderId);
 
                 try
                 {

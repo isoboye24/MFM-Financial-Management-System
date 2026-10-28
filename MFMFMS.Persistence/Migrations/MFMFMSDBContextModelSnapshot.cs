@@ -380,6 +380,9 @@ namespace MFMFMS.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("GenderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -401,6 +404,8 @@ namespace MFMFMS.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GenderId");
 
                     b.HasIndex("PositionId");
 
@@ -490,11 +495,19 @@ namespace MFMFMS.Persistence.Migrations
 
             modelBuilder.Entity("MFMFMS.Domain.Entities.Member", b =>
                 {
+                    b.HasOne("MFMFMS.Domain.Entities.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MFMFMS.Domain.Entities.Position", "Position")
                         .WithMany()
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Gender");
 
                     b.Navigation("Position");
                 });

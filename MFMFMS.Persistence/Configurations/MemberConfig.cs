@@ -13,6 +13,7 @@ namespace MFMFMS.Persistence.Configurations
             builder.Property(prop => prop.Address).IsRequired();
             builder.Property(prop => prop.PhoneNumber).IsRequired();
             builder.Property(prop => prop.PositionId).IsRequired();
+            builder.Property(prop => prop.GenderId).IsRequired();
         }
     }
 }

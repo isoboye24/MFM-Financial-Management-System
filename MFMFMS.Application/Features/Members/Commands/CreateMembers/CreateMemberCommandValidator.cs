@@ -11,6 +11,7 @@ namespace MFMFMS.Application.Features.Members.Commands.CreateMembers
             RuleFor(p => p.Address).NotEmpty().WithMessage("The field {PropertyName} is required.");
             RuleFor(p => p.PhoneNumber).NotEmpty().WithMessage("The field {PropertyName} is required.");
             RuleFor(p => p.PositionId).NotEmpty().WithMessage("The field {PropertyName} is required.");
+            RuleFor(p => p.GenderId).NotEmpty().WithMessage("The field {PropertyName} is required.");
         }
     }
 }

@@ -32,7 +32,8 @@ namespace MFMFMS.API.Controllers
                 LastName = createMemberDTO.LastName,
                 Address = createMemberDTO.Address,
                 PhoneNumber = createMemberDTO.PhoneNumber,
-                PositionId = createMemberDTO.PositionId
+                PositionId = createMemberDTO.PositionId,
+                GenderId = createMemberDTO.GenderId
             };
             await _mediator.Send(command);
             return Ok();
@@ -65,6 +66,7 @@ namespace MFMFMS.API.Controllers
                 Address = updateMemberDTO.Address,
                 PhoneNumber = updateMemberDTO.PhoneNumber,
                 PositionId = updateMemberDTO.PositionId,
+                GenderId = updateMemberDTO.GenderId,
             };
 
             await _mediator.Send(command);

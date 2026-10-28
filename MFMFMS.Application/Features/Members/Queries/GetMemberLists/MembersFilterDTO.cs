@@ -9,5 +9,6 @@
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public Guid PositionId { get; set; }
+        public Guid GenderId { get; set; }
     }
 }
