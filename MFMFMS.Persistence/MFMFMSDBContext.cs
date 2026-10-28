@@ -56,5 +56,6 @@ namespace MFMFMS.Persistence
         public DbSet<MeetingCategory> MeetingCategories { get; set; }
         public DbSet<FinancialSummaryMonthlyReport> FinancialSummaryMonthlyReports { get; set; }
         public DbSet<Gender> Genders { get; set; }
+        public DbSet<MemberNote> MemberNotes { get; set; }
     }
 }

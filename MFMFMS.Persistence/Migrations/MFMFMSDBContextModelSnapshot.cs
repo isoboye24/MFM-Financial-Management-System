@@ -412,6 +412,51 @@ namespace MFMFMS.Persistence.Migrations
                     b.ToTable("Members");
                 });
 
+            modelBuilder.Entity("MFMFMS.Domain.Entities.MemberNote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastMofifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NoteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NoteTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("MemberNotes");
+                });
+
             modelBuilder.Entity("MFMFMS.Domain.Entities.Month", b =>
                 {
                     b.Property<int>("Id")
@@ -510,6 +555,17 @@ namespace MFMFMS.Persistence.Migrations
                     b.Navigation("Gender");
 
                     b.Navigation("Position");
+                });
+
+            modelBuilder.Entity("MFMFMS.Domain.Entities.MemberNote", b =>
+                {
+                    b.HasOne("MFMFMS.Domain.Entities.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
                 });
 #pragma warning restore 612, 618
         }
