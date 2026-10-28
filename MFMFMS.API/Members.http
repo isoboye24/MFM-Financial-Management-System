@@ -5,11 +5,12 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "firstName": "Testing",
-  "lastName": "Testing",
-  "address": "86 Akazienalle St",
+  "firstName": "Johnny",
+  "lastName": "Griezmann",
+  "address": "60 Birkenallee St",
   "phoneNumber": "+4915018548300",
-  "positionId": "019FE1C0-19D4-72C3-8023-1C2C6546B48F"
+  "positionId": "019FE1C0-19D4-72C3-8023-1C2C6546B48F",
+  "genderId": "9033c58b-c59a-4e0a-a554-794c0d9f9e90"
 }
 
 ### Get All
@@ -31,7 +32,8 @@ Content-type: application/json
   "lastName": "Testing",
   "address": "40 Akazienalle St",
   "phoneNumber": "+4915018548300",
-  "positionId": "019FE1C0-324C-7DAC-B1BA-940C1A5BA4AB"
+  "positionId": "019FE1C0-324C-7DAC-B1BA-940C1A5BA4AB",
+  "genderId": "9033c58b-c59a-4e0a-a554-794c0d9f9e90"
 }
 
 ### Temporarily Delete by Id

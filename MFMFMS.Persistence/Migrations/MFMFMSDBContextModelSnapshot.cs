@@ -443,9 +443,6 @@ namespace MFMFMS.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("NoteDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NoteTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

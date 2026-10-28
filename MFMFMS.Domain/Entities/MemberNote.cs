@@ -6,17 +6,15 @@ namespace MFMFMS.Domain.Entities
     {
         public string Note { get; private set; } = string.Empty;
         public string NoteTitle { get; private set; } = string.Empty;
-        public DateTime NoteDate { get; private set; }
         public Guid MemberId { get; private set; }
         public Member? Member { get; private set; }
 
-        public MemberNote(string note, string noteTitle, DateTime noteDate, Guid memberId)
+        public MemberNote(string note, string noteTitle, Guid memberId)
         {
-            ValidateAll(note, noteTitle, noteDate, memberId);
+            ValidateAll(note, noteTitle, memberId);
 
             Note = note;
             NoteTitle = noteTitle.Trim();
-            NoteDate = noteDate;
             MemberId = memberId;
             Id = Guid.CreateVersion7();
         }
@@ -26,11 +24,10 @@ namespace MFMFMS.Domain.Entities
             
         }
 
-        private static void ValidateAll(string note, string noteTitle, DateTime noteDate, Guid memberId)
+        private static void ValidateAll(string note, string noteTitle, Guid memberId)
         {
             ValidateNote(note);
             ValidateNoteTitle(noteTitle);
-            ValidateNoteDate(noteDate);
             ValidateMemberId(memberId);
         }
 
@@ -65,20 +62,6 @@ namespace MFMFMS.Domain.Entities
         {
             ValidateNoteTitle(noteTitle);
             NoteTitle = noteTitle.Trim();
-        }
-
-        private static void ValidateNoteDate(DateTime noteDate)
-        {
-            if (noteDate == DateTime.MinValue)
-            {
-                throw new BusinessRuleException("Note Date is required.");
-            }
-        }
-
-        public void UpdateNoteDate(DateTime noteDate)
-        {
-            ValidateNoteDate(noteDate);
-            NoteDate = noteDate;
         }
 
         private static void ValidateMemberId(Guid memberId)

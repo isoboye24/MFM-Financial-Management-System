@@ -41,7 +41,7 @@ namespace MFMFMS.Persistence.Repositories
 
             return await query
                 .Include(x => x.Member)
-                .OrderByDescending(x => x.NoteDate)
+                .OrderByDescending(x => x.CreationTime)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
         }
@@ -57,7 +57,7 @@ namespace MFMFMS.Persistence.Repositories
 
             return await query
                 .Include(x => x.Member)
-                .OrderByDescending(x => x.NoteDate)
+                .OrderByDescending(x => x.CreationTime)
                 .Paginate(filter.Page, filter.RecordsPerPage)
                 .ToListAsync();
         }
