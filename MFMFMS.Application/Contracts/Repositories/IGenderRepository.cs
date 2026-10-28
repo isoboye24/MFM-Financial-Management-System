@@ -6,6 +6,6 @@ namespace MFMFMS.Application.Contracts.Repositories
     public interface IGenderRepository
     {
         Task<IEnumerable<Gender>> GetFiltered(GendersFilterDTO filter);
-        Task<Gender?> GetById(int id);
+        Task<Gender?> GetById(Guid id);
     }
 }

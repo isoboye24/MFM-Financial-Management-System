@@ -1,6 +1,8 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
 using MFMFMS.Application.Features.Genders.GetGenderList;
 using MFMFMS.Domain.Entities;
+using MFMFMS.Persistence.Utilities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MFMFMS.Persistence.Repositories
 {
@@ -13,14 +15,25 @@ namespace MFMFMS.Persistence.Repositories
             _db = db;
         }
 
-        public Task<Gender?> GetById(int id)
+        public async Task<Gender?> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _db.Genders.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<IEnumerable<Gender>> GetFiltered(GendersFilterDTO filter)
+        public async Task<IEnumerable<Gender>> GetFiltered(GendersFilterDTO filter)
         {
-            throw new NotImplementedException();
+            var query = _db.Genders.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter.Name))
+            {
+                query = query.Where(x =>
+                    x.Name.Contains(filter.Name));
+            }
+
+            return await query
+                .OrderBy(x => x.Name)
+                .Paginate(filter.Page, filter.RecordsPerPage)
+                .ToListAsync();
         }
     }
 }
