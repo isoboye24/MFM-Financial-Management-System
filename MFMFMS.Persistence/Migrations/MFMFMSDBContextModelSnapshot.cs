@@ -195,6 +195,21 @@ namespace MFMFMS.Persistence.Migrations
                     b.ToTable("FinancialSummaryMonthlyReports");
                 });
 
+            modelBuilder.Entity("MFMFMS.Domain.Entities.Gender", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genders");
+                });
+
             modelBuilder.Entity("MFMFMS.Domain.Entities.Giving", b =>
                 {
                     b.Property<Guid>("Id")
@@ -202,6 +217,7 @@ namespace MFMFMS.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("CategoryId")

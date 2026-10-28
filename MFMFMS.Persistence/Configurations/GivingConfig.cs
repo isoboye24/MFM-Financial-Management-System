@@ -9,7 +9,7 @@ namespace MFMFMS.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Giving> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Amount).IsRequired();
+            builder.Property(g => g.Amount).IsRequired().HasPrecision(18, 2);
             builder.Property(x => x.Date).IsRequired();
             builder.Property(x => x.Summary).IsRequired();
 
