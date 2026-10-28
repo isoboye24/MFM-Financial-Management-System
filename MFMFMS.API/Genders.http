@@ -1,0 +1,7 @@
+@Host = http://192.168.0.195:7200/api/genders
+
+### Get All
+
+GET {{Host}}
+Accept: application/json
+
