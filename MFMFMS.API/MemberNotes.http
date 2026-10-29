@@ -5,9 +5,9 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "note": "Pastor called me to take prayers on sunday.",
-  "noteTitle": "Lead prayers on sunday",
-  "memberId": "01a1848a-8e3d-754b-a785-46afd928abc3"
+  "note": "There will be workers meeting today and you will lead the meeting.",
+  "noteTitle": "Lead workers meeting",
+  "memberId": "01a1848b-81e6-7c0c-b3a3-2b91543fa261"
 }
 
 ### Get All
