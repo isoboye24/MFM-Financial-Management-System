@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.MemberNotes;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MemberNotes.Commands.CreateMemberNote;
+using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteDetail;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteLists;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,13 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<MemberNoteDetailDTO>> GetById(Guid id)
+        {
+            var query = new GetMemberNoteDetailQuery { Id = id };
+            return await _mediator.Send(query);
         }
     }
 }
