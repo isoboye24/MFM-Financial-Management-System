@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MemberNotes.Commands.CreateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Commands.DeleteMemberNote;
+using MFMFMS.Application.Features.MemberNotes.Commands.DeleteMemberNotePermanently;
 using MFMFMS.Application.Features.MemberNotes.Commands.RestoreDeletedMemberNotes;
 using MFMFMS.Application.Features.MemberNotes.Commands.UpdateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetDeletedMemberNoteLists;
@@ -88,6 +89,13 @@ namespace MFMFMS.API.Controllers
                 Id = id
             });
 
+            return NoContent();
+        }
+
+        [HttpDelete("{id}/permanent")]
+        public async Task<IActionResult> DeletePermanently(Guid id)
+        {
+            await _mediator.Send(new DeleteMemberNotePermanentlyCommand { Id = id });
             return NoContent();
         }
     }
