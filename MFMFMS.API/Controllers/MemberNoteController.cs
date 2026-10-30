@@ -2,6 +2,7 @@
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Features.MemberNotes.Commands.CreateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Commands.DeleteMemberNote;
+using MFMFMS.Application.Features.MemberNotes.Commands.RestoreDeletedMemberNotes;
 using MFMFMS.Application.Features.MemberNotes.Commands.UpdateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetDeletedMemberNoteLists;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteDetail;
@@ -77,6 +78,17 @@ namespace MFMFMS.API.Controllers
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
+        }
+
+        [HttpPut("{id}/restore")]
+        public async Task<IActionResult> Restore(Guid id)
+        {
+            await _mediator.Send(new RestoreDeletedMemberNoteCommand
+            {
+                Id = id
+            });
+
+            return NoContent();
         }
     }
 }
