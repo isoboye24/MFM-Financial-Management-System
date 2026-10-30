@@ -5,8 +5,8 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "note": "This note should be tested.",
-  "noteTitle": "Note testing",
+  "note": "This note should be tested2.",
+  "noteTitle": "Note testing2",
   "memberId": "01a1848b-81e6-7c0c-b3a3-2b91543fa261"
 }
 
@@ -38,7 +38,7 @@ Content-type: application/json
 
 ### Temporarily Delete by Id
 
-DELETE {{Host}}/01a18efe-29e4-76ff-81d7-0010df01fec2
+DELETE {{Host}}/01a18f08-51ba-7f22-a2d4-81bd27e03002
 
 ### Restore by Id
 

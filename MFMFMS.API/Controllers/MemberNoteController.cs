@@ -1,11 +1,9 @@
-﻿using MFMFMS.API.DTOs.Meetings;
-using MFMFMS.API.DTOs.MemberNotes;
+﻿using MFMFMS.API.DTOs.MemberNotes;
 using MFMFMS.API.Utilities;
-using MFMFMS.Application.Features.Expenditures.Commands.DeleteExpenditure;
-using MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting;
 using MFMFMS.Application.Features.MemberNotes.Commands.CreateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Commands.DeleteMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Commands.UpdateMemberNote;
+using MFMFMS.Application.Features.MemberNotes.Queries.GetDeletedMemberNoteLists;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteDetail;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteLists;
 using MFMFMS.Application.Utilities;
@@ -71,6 +69,14 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new DeleteMemberNoteCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("deleted")]
+        public async Task<ActionResult<List<DeletedMemberNoteListsDTO>>> GetDeleted([FromQuery] GetDeletedMemberNoteListsQuery query)
+        {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
         }
     }
 }
