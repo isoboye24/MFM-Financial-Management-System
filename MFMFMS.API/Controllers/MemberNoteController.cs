@@ -1,6 +1,11 @@
-﻿using MFMFMS.API.DTOs.MemberNotes;
+﻿using MFMFMS.API.DTOs.Meetings;
+using MFMFMS.API.DTOs.MemberNotes;
 using MFMFMS.API.Utilities;
+using MFMFMS.Application.Features.Expenditures.Commands.DeleteExpenditure;
+using MFMFMS.Application.Features.Meetings.Commands.UpdateMeeting;
 using MFMFMS.Application.Features.MemberNotes.Commands.CreateMemberNote;
+using MFMFMS.Application.Features.MemberNotes.Commands.DeleteMemberNote;
+using MFMFMS.Application.Features.MemberNotes.Commands.UpdateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteDetail;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteLists;
 using MFMFMS.Application.Utilities;
@@ -44,6 +49,28 @@ namespace MFMFMS.API.Controllers
         {
             var query = new GetMemberNoteDetailQuery { Id = id };
             return await _mediator.Send(query);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UpdateMemberNoteDTO updateMemberNoteDTO)
+        {
+            var command = new UpdateMemberNoteCommand
+            {
+                Id = id,
+                NoteTitle = updateMemberNoteDTO.NoteTitle,
+                Note = updateMemberNoteDTO.Note,
+                MemberId = updateMemberNoteDTO.MemberId
+            };
+
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteMemberNoteCommand { Id = id });
+            return NoContent();
         }
     }
 }

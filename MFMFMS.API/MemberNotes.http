@@ -5,8 +5,8 @@
 Post {{Host}}
 Content-type: application/json
 {
-  "note": "There will be workers meeting today and you will lead the meeting.",
-  "noteTitle": "Lead workers meeting",
+  "note": "This note should be tested.",
+  "noteTitle": "Note testing",
   "memberId": "01a1848b-81e6-7c0c-b3a3-2b91543fa261"
 }
 
@@ -28,30 +28,25 @@ ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fe827-9fdb-7e9e-8041-b5a06c836118
+PUT {{Host}}/01a189c9-4285-7c32-baa4-4996386c1855
 Content-type: application/json
 {
-  
-  "date": "2024-06-01T10:00:00",
-  "summary": "Bible Studies",
-  "messageTitle": "Prayer",
-  "minister": "John Doe",
-  "noOfMaleAttendance": 10,
-  "noOfFemaleAttendance": 4,
-  "noOfChildrenAttendance": 2
+  "note": "Pastor called me to take prayers on sunday.",
+  "noteTitle": "Title updated",
+  "memberId": "01a1848b-81e6-7c0c-b3a3-2b91543fa261"
 }
 
 ### Temporarily Delete by Id
 
-DELETE {{Host}}/01a07e1b-3a4f-7108-8bdc-7f1a015474f2
+DELETE {{Host}}/01a18efe-29e4-76ff-81d7-0010df01fec2
 
 ### Restore by Id
 
-PUT {{Host}}/01a07e1b-3a4f-7108-8bdc-7f1a015474f2/restore
+PUT {{Host}}/01a18efe-29e4-76ff-81d7-0010df01fec2/restore
 
 ### Permanently Delete by Id
 
-DELETE {{Host}}/019fe84a-b658-77f4-b4de-fcce2b68a0b9/permanent
+DELETE {{Host}}/01a18efe-29e4-76ff-81d7-0010df01fec2/permanent
 
 
 ### Get by month and year
