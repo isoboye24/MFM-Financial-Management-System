@@ -9,6 +9,7 @@
         public required string PhoneNumber { get; set; }
         public required string PositionName { get; set; }
         public required string GenderName { get; set; }
+        public string? Email { get; set; }
         public required DateTime DeletedAt { get; set; }
     }
 }

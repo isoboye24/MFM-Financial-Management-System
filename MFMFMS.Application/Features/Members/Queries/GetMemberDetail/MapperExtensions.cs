@@ -13,6 +13,7 @@ namespace MFMFMS.Application.Features.Members.Queries.GetMemberDetail
                 LastName = member.LastName,
                 Address = member.Address,
                 PhoneNumber = member.PhoneNumber,
+                Email = member.Email ?? string.Empty,
                 PositionName = member.Position?.Name ?? string.Empty,
                 GenderName = member.Gender?.Name ?? string.Empty
             };

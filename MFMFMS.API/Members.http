@@ -9,6 +9,7 @@ Content-type: application/json
   "lastName": "Griezmann",
   "address": "60 Birkenallee St",
   "phoneNumber": "+4915018548300",
+  "email": "johnny.griezmann@example.com",
   "positionId": "019FE1C0-19D4-72C3-8023-1C2C6546B48F",
   "genderId": "9033c58b-c59a-4e0a-a554-794c0d9f9e90"
 }
@@ -25,13 +26,14 @@ ACCEPT: application/json
 
 ### Update by Id
 
-PUT {{Host}}/019fefb8-9fed-7137-83cd-be5a3ffc9771
+PUT {{Host}}/01a1848b-81e6-7c0c-b3a3-2b91543fa261
 Content-type: application/json
 {
-  "firstName": "Testing",
-  "lastName": "Testing",
-  "address": "40 Akazienalle St",
+  "firstName": "Johnny",
+  "lastName": "Griezmann",
+  "address": "60 Birkenallee St",
   "phoneNumber": "+4915018548300",
+  "email": "testing@example.com",
   "positionId": "019FE1C0-324C-7DAC-B1BA-940C1A5BA4AB",
   "genderId": "9033c58b-c59a-4e0a-a554-794c0d9f9e90"
 }

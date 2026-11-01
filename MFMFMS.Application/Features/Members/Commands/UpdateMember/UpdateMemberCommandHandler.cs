@@ -29,6 +29,7 @@ namespace MFMFMS.Application.Features.Members.Commands.UpdateMember
             member.UpdatePhoneNumber(request.PhoneNumber);
             member.UpdatePositionId(request.PositionId);
             member.UpdateGenderId(request.GenderId);
+            member.UpdateEmail(request.Email);
 
             try
             {

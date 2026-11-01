@@ -32,6 +32,7 @@ namespace MFMFMS.API.Controllers
                 LastName = createMemberDTO.LastName,
                 Address = createMemberDTO.Address,
                 PhoneNumber = createMemberDTO.PhoneNumber,
+                Email = createMemberDTO.Email,
                 PositionId = createMemberDTO.PositionId,
                 GenderId = createMemberDTO.GenderId
             };
@@ -65,6 +66,7 @@ namespace MFMFMS.API.Controllers
                 LastName = updateMemberDTO.LastName,
                 Address = updateMemberDTO.Address,
                 PhoneNumber = updateMemberDTO.PhoneNumber,
+                Email = updateMemberDTO.Email,
                 PositionId = updateMemberDTO.PositionId,
                 GenderId = updateMemberDTO.GenderId,
             };
