@@ -1,4 +1,5 @@
 ﻿using MFMFMS.Domain.Exceptions;
+using System.Net.Mail;
 
 namespace MFMFMS.Domain.Entities
 {
@@ -12,10 +13,11 @@ namespace MFMFMS.Domain.Entities
         public Position? Position { get; private set; }
         public Guid GenderId { get; private set; }
         public Gender? Gender { get; private set; }
+        public string? Email { get; private set; }
 
-        public Member(string firstName, string lastName, string address, string phoneNumber, Guid positionId, Guid genderId)
+        public Member(string firstName, string lastName, string address, string phoneNumber, Guid positionId, Guid genderId, string? email)
         {
-            ValidateAll(firstName, lastName, address, phoneNumber, positionId, genderId);
+            ValidateAll(firstName, lastName, address, phoneNumber, positionId, genderId, email);
 
             FirstName = firstName.Trim();
             LastName = lastName.Trim();
@@ -24,6 +26,8 @@ namespace MFMFMS.Domain.Entities
             PositionId = positionId;
             GenderId = genderId;
             Id = Guid.CreateVersion7();
+            
+            Email = NormalizeEmail(email);
         }
 
         private Member()
@@ -31,7 +35,7 @@ namespace MFMFMS.Domain.Entities
 
         }
 
-        private static void ValidateAll(string firstName, string lastName, string address, string phoneNumber, Guid positionId, Guid genderId)
+        private static void ValidateAll(string firstName, string lastName, string address, string phoneNumber, Guid positionId, Guid genderId, string? email)
         {
             ValidateFirstName(firstName);
             ValidateLastName(lastName);
@@ -39,6 +43,7 @@ namespace MFMFMS.Domain.Entities
             ValidatePhoneNumber(phoneNumber);
             ValidatePositionId(positionId);
             ValidateGenderId(genderId);
+            ValidateEmail(email);
         }
 
         private static void ValidateFirstName(string firstName)
@@ -123,6 +128,43 @@ namespace MFMFMS.Domain.Entities
         {
             ValidateGenderId(genderId);
             GenderId = genderId;
+        }
+
+        private static string? NormalizeEmail(string? email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return null;
+
+            return email.Trim().ToLowerInvariant();
+        }
+
+        private static void ValidateEmail(string? email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return;
+
+            try
+            {
+                var normalizedEmail = email.Trim();
+                var address = new MailAddress(normalizedEmail);
+
+                // Reject display-name formats such as:
+                // John Doe <john@gmail.com>
+                if (!string.Equals(address.Address, normalizedEmail, StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new BusinessRuleException("Invalid email address.");
+                }
+            }
+            catch (FormatException)
+            {
+                throw new BusinessRuleException("Invalid email address.");
+            }
+        }
+
+        public void UpdateEmail(string? email)
+        {
+            ValidateEmail(email);
+            Email = NormalizeEmail(email);
         }
     }
 }
