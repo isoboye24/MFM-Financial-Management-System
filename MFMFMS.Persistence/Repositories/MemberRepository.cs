@@ -43,16 +43,6 @@ namespace MFMFMS.Persistence.Repositories
                 query = query.Where(p => p.LastName.Contains(filter.LastName));
             }
 
-            if (!string.IsNullOrWhiteSpace(filter.Address))
-            {
-                query = query.Where(p => p.Address.Contains(filter.Address));
-            }
-
-            if (!string.IsNullOrWhiteSpace(filter.PhoneNumber))
-            {
-                query = query.Where(p => p.PhoneNumber.Contains(filter.PhoneNumber));
-            }
-
             if (filter.PositionId != Guid.Empty)
             {
                 query = query.Where(p => p.PositionId == filter.PositionId);
@@ -85,16 +75,6 @@ namespace MFMFMS.Persistence.Repositories
                 query = query.Where(p => p.LastName.Contains(filter.LastName));
             }
 
-            if (!string.IsNullOrWhiteSpace(filter.Address))
-            {
-                query = query.Where(p => p.Address.Contains(filter.Address));
-            }
-
-            if (!string.IsNullOrWhiteSpace(filter.PhoneNumber))
-            {
-                query = query.Where(p => p.PhoneNumber.Contains(filter.PhoneNumber));
-            }
-
             if (filter.PositionId.HasValue)
             {
                 query = query.Where(p => p.PositionId == filter.PositionId.Value);
@@ -115,6 +95,7 @@ namespace MFMFMS.Persistence.Repositories
         public async Task<Member?> GetMemberDetail(Guid id)
         {
             return await _db.Members
+                           .Include(x => x.Gender)
                            .Include(x => x.Position)
                            .FirstOrDefaultAsync(x => x.Id == id);
         }

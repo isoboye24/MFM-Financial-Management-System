@@ -1,5 +1,6 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetDeletedMemberNoteLists;
+using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteByMemberIdLists;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteLists;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
@@ -53,6 +54,27 @@ namespace MFMFMS.Persistence.Repositories
             if (!string.IsNullOrWhiteSpace(filter.NoteTitle))
             {
                 query = query.Where(p => p.NoteTitle.Contains(filter.NoteTitle));
+            }
+
+            return await query
+                .Include(x => x.Member)
+                .OrderByDescending(x => x.CreationTime)
+                .Paginate(filter.Page, filter.RecordsPerPage)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<MemberNote>> GetFilteredByMemberId(MemberNoteByMemberIdFilterDTO filter)
+        {
+            var query = _db.MemberNotes.Where(x => !x.IsDeleted);
+
+            if (!string.IsNullOrWhiteSpace(filter.NoteTitle))
+            {
+                query = query.Where(p => p.NoteTitle.Contains(filter.NoteTitle));
+            }
+
+            if (filter.MemberId != Guid.Empty)
+            {
+                query = query.Where(p => p.MemberId == filter.MemberId);
             }
 
             return await query

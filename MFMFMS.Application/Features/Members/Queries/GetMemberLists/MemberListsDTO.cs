@@ -10,5 +10,6 @@
         public required string PositionName { get; set; }
         public required string GenderName { get; set; }
         public string? Email { get; set; }
+        public DateOnly CreatedAt { get; set; }
     }
 }

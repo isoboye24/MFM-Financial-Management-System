@@ -1,4 +1,5 @@
 ﻿using MFMFMS.Application.Features.MemberNotes.Queries.GetDeletedMemberNoteLists;
+using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteByMemberIdLists;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteLists;
 using MFMFMS.Domain.Entities;
 
@@ -8,6 +9,7 @@ namespace MFMFMS.Application.Contracts.Repositories
     {
         Task<bool> Exists(string noteTitle, Guid memberId, bool isDeleted = false);
         Task<IEnumerable<MemberNote>> GetFiltered(MemberNotesFilterDTO filter);
+        Task<IEnumerable<MemberNote>> GetFilteredByMemberId(MemberNoteByMemberIdFilterDTO filter);
         Task<IEnumerable<MemberNote>> GetDeletedFiltered(DeletedMemberNotesFilterDTO filter);
     }
 }

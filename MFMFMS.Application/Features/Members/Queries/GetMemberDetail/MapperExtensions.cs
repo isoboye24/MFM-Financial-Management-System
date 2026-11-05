@@ -14,8 +14,11 @@ namespace MFMFMS.Application.Features.Members.Queries.GetMemberDetail
                 Address = member.Address,
                 PhoneNumber = member.PhoneNumber,
                 Email = member.Email ?? string.Empty,
+                PositionId = member.PositionId,
                 PositionName = member.Position?.Name ?? string.Empty,
-                GenderName = member.Gender?.Name ?? string.Empty
+                GenderId = member.GenderId,
+                GenderName = member.Gender?.Name ?? string.Empty,
+                CreatedAt = DateOnly.FromDateTime(member.CreationTime ?? DateTime.Now)
             };
         }
     }

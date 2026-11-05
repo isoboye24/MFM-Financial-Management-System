@@ -6,6 +6,7 @@ using MFMFMS.Application.Features.MemberNotes.Commands.DeleteMemberNotePermanent
 using MFMFMS.Application.Features.MemberNotes.Commands.RestoreDeletedMemberNotes;
 using MFMFMS.Application.Features.MemberNotes.Commands.UpdateMemberNote;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetDeletedMemberNoteLists;
+using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteByMemberIdLists;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteDetail;
 using MFMFMS.Application.Features.MemberNotes.Queries.GetMemberNoteLists;
 using MFMFMS.Application.Utilities;
@@ -39,6 +40,16 @@ namespace MFMFMS.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<MemberNoteListsDTO>>> GetAll([FromQuery] GetMemberNoteListsQuery query)
         {
+            var result = await _mediator.Send(query);
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+            return result.Items;
+        }
+
+        [HttpGet("{id}/by-member-id")]
+        public async Task<ActionResult<List<MemberNoteByMemberIdListsDTO>>> GetAllByMemberId(Guid id, [FromQuery] GetMemberNoteByMemberIdListsQuery query)
+        {
+            query.MemberId = id;
+
             var result = await _mediator.Send(query);
             HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
             return result.Items;
@@ -97,6 +108,12 @@ namespace MFMFMS.API.Controllers
         {
             await _mediator.Send(new DeleteMemberNotePermanentlyCommand { Id = id });
             return NoContent();
+        }
+
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok("MemberNoteController is responding!");
         }
     }
 }

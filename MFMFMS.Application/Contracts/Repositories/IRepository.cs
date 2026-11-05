@@ -11,5 +11,6 @@
         Task Delete(T entity);
         Task DeletePermanently(T entity);
         Task<int> GetTotalAmountOfRecords();
+        Task<int> GetTotalAmountOfRecordsById(Guid id);
     }
 }

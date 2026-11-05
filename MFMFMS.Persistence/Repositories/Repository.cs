@@ -71,5 +71,10 @@ namespace MFMFMS.Persistence.Repositories
             _db.Update(entity);
             return Task.CompletedTask;
         }
+
+        public async Task<int> GetTotalAmountOfRecordsById(Guid id)
+        {
+            return await _db.Set<T>().CountAsync();
+        }
     }
 }

@@ -7,8 +7,11 @@
         public required string LastName { get; set; }
         public required string Address { get; set; }
         public required string PhoneNumber { get; set; }
+        public Guid PositionId { get; set; }
         public required string PositionName { get; set; }
+        public Guid GenderId { get; set; }
         public required string GenderName { get; set; }
         public string? Email { get; set; }
+        public DateOnly CreatedAt { get; set; }
     }
 }
