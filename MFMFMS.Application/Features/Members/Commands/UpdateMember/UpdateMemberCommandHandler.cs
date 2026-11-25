@@ -30,6 +30,7 @@ namespace MFMFMS.Application.Features.Members.Commands.UpdateMember
             member.UpdatePositionId(request.PositionId);
             member.UpdateGenderId(request.GenderId);
             member.UpdateEmail(request.Email);
+            member.UpdateImagePath(request.ImagePath);
 
             try
             {

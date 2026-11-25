@@ -11,5 +11,6 @@
         public Guid PositionId { get; set; }
         public Guid GenderId { get; set; }
         public string? Email { get; set; }
+        public string? ImagePath { get; set; }
     }
 }

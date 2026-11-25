@@ -14,6 +14,7 @@ namespace MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists
                 Address = member.Address,
                 PhoneNumber = member.PhoneNumber,
                 Email = member.Email ?? string.Empty,
+                ImagePath = member.ImagePath ?? string.Empty,
                 PositionName = member.Position?.Name ?? string.Empty,
                 GenderName = member.Gender?.Name ?? string.Empty,
                 CreatedAt = DateOnly.FromDateTime(member.CreationTime ?? DateTime.Now),

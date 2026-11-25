@@ -11,5 +11,6 @@ namespace MFMFMS.Application.Features.Members.Commands.CreateMembers
         public required Guid PositionId { get; set; }
         public required Guid GenderId { get; set; }
         public string? Email { get; set; }
+        public string? ImagePath { get; set; }
     }
 }

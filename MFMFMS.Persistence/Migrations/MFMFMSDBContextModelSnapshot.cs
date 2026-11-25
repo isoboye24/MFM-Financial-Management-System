@@ -386,6 +386,9 @@ namespace MFMFMS.Persistence.Migrations
                     b.Property<Guid>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 

@@ -14,8 +14,9 @@ namespace MFMFMS.Domain.Entities
         public Guid GenderId { get; private set; }
         public Gender? Gender { get; private set; }
         public string? Email { get; private set; }
+        public string? ImagePath { get; private set; }
 
-        public Member(string firstName, string lastName, string address, string phoneNumber, Guid positionId, Guid genderId, string? email)
+        public Member(string firstName, string lastName, string address, string phoneNumber, Guid positionId, Guid genderId, string? email, string? imagePath = null)
         {
             ValidateAll(firstName, lastName, address, phoneNumber, positionId, genderId, email);
 
@@ -28,6 +29,7 @@ namespace MFMFMS.Domain.Entities
             Id = Guid.CreateVersion7();
             
             Email = NormalizeEmail(email);
+            ImagePath = NormalizeImagePath(imagePath);
         }
 
         private Member()
@@ -165,6 +167,19 @@ namespace MFMFMS.Domain.Entities
         {
             ValidateEmail(email);
             Email = NormalizeEmail(email);
+        }
+
+        private static string? NormalizeImagePath(string? imagePath)
+        {
+            if (string.IsNullOrWhiteSpace(imagePath))
+                return null;
+
+            return imagePath.Trim().Replace('\\', '/');
+        }
+
+        public void UpdateImagePath(string? imagePath)
+        {
+            ImagePath = NormalizeImagePath(imagePath);
         }
     }
 }
