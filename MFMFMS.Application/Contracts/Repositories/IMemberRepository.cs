@@ -10,5 +10,7 @@ namespace MFMFMS.Application.Contracts.Repositories
         Task<IEnumerable<Member>> GetFiltered(MembersFilterDTO filter);
         Task<IEnumerable<Member>> GetDeletedFiltered(DeletedMembersFilterDTO filter);
         Task<Member?> GetMemberDetail(Guid id);
+
+        Task<bool> IsImagePathInUse(string imagePath);
     }
 }

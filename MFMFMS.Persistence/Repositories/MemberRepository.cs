@@ -29,6 +29,11 @@ namespace MFMFMS.Persistence.Repositories
             }
         }
 
+        public async Task<bool> IsImagePathInUse(string imagePath)
+        {
+            return await _db.Members.AnyAsync(x => x.ImagePath == imagePath);
+        }
+
         public async Task<IEnumerable<Member>> GetFiltered(MembersFilterDTO filter)
         {
             var query = _db.Members.Where(x => !x.IsDeleted).AsQueryable();
