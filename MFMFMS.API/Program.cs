@@ -7,6 +7,7 @@ using MFMFMS.Security;
 using MFMFMS.Security.Models;
 using MFMFMS.Security.Seed;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 using QuestPDF.Infrastructure;
 using System.Text.Json.Serialization;
 
@@ -41,6 +42,19 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructure();
 
 var app = builder.Build();
+
+var uploadsPath = Path.Combine(
+    app.Environment.ContentRootPath,
+    "Uploads"
+);
+
+Directory.CreateDirectory(uploadsPath);
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadsPath),
+    RequestPath = "/uploads"
+});
 
 using (var scope = app.Services.CreateScope())
 {

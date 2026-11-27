@@ -1,5 +1,6 @@
 ﻿using MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists;
 using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
+using MFMFMS.Application.Features.Members.Queries.GetTotalMemberStatistics;
 using MFMFMS.Domain.Entities;
 
 namespace MFMFMS.Application.Contracts.Repositories
@@ -10,6 +11,8 @@ namespace MFMFMS.Application.Contracts.Repositories
         Task<IEnumerable<Member>> GetFiltered(MembersFilterDTO filter);
         Task<IEnumerable<Member>> GetDeletedFiltered(DeletedMembersFilterDTO filter);
         Task<Member?> GetMemberDetail(Guid id);
+
+        Task<TotalMemberStatisticsDTO> GetTotalMemberStatistics();
 
         Task<bool> IsImagePathInUse(string imagePath);
     }

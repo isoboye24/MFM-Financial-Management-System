@@ -1,6 +1,7 @@
 ﻿using MFMFMS.Application.Contracts.Repositories;
 using MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists;
 using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
+using MFMFMS.Application.Features.Members.Queries.GetTotalMemberStatistics;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +104,45 @@ namespace MFMFMS.Persistence.Repositories
                            .Include(x => x.Gender)
                            .Include(x => x.Position)
                            .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<TotalMemberStatisticsDTO> GetTotalMemberStatistics()
+        {
+            var sixMonthsAgo = DateTime.UtcNow.AddMonths(-6);
+
+            var statistics = await _db.Members
+                .Where(x => !x.IsDeleted)
+                .GroupBy(x => x.Gender!.Name)
+                .Select(g => new
+                {
+                    Name = g.Key,
+                    Total = g.Count()
+                })
+                .ToListAsync();
+
+            var totalWorkers = await _db.Members
+                .CountAsync(x => !x.IsDeleted);
+
+            var totalNewWorkers = await _db.Members
+                .CountAsync(x =>
+                    !x.IsDeleted &&
+                    x.CreationTime >= sixMonthsAgo);
+
+            return new TotalMemberStatisticsDTO
+            {
+                TotalMaleWorkers = statistics
+                    .Where(x => x.Name == "Male")
+                    .Select(x => (decimal)x.Total)
+                    .FirstOrDefault(),
+
+                TotalFemaleWorkers = statistics
+                    .Where(x => x.Name == "Female")
+                    .Select(x => (decimal)x.Total)
+                    .FirstOrDefault(),
+
+                TotalNewWorkers = totalNewWorkers,
+                TotalWorkers = totalWorkers
+            };
         }
     }
 }

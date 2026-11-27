@@ -1,6 +1,7 @@
 ﻿using MFMFMS.API.DTOs.Members;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Contracts.Storage;
+using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
 using MFMFMS.Application.Features.Members.Commands.DeleteMember;
 using MFMFMS.Application.Features.Members.Commands.PermanentDeleteMember;
@@ -9,6 +10,7 @@ using MFMFMS.Application.Features.Members.Commands.UpdateMember;
 using MFMFMS.Application.Features.Members.Queries.GetDeletedMemberLists;
 using MFMFMS.Application.Features.Members.Queries.GetMemberDetail;
 using MFMFMS.Application.Features.Members.Queries.GetMemberLists;
+using MFMFMS.Application.Features.Members.Queries.GetTotalMemberStatistics;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -172,6 +174,14 @@ namespace MFMFMS.API.Controllers
             {
                 ImagePath = imagePath
             });
+        }
+
+        [HttpGet("total/statistics")]
+        public async Task<ActionResult<TotalMemberStatisticsDTO>> GetTotalStatistics()
+        {
+            var query = new GetTotalMemberStatisticsQuery();
+
+            return await _mediator.Send(query);
         }
     }
 }
