@@ -1,7 +1,6 @@
 ﻿using MFMFMS.API.DTOs.Members;
 using MFMFMS.API.Utilities;
 using MFMFMS.Application.Contracts.Storage;
-using MFMFMS.Application.Features.Givings.Queries.GetTotalGivingStatistics;
 using MFMFMS.Application.Features.Members.Commands.CreateMembers;
 using MFMFMS.Application.Features.Members.Commands.DeleteMember;
 using MFMFMS.Application.Features.Members.Commands.PermanentDeleteMember;

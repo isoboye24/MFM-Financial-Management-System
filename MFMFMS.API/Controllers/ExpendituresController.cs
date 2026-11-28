@@ -12,6 +12,7 @@ using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
 using MFMFMS.Application.Features.Expenditures.Queries.GetMonthlyExpendituresStatistics;
 using MFMFMS.Application.Features.Expenditures.Queries.GetTotalExpenditureStatistics;
+using MFMFMS.Application.Features.Expenditures.Queries.SearchExpenditures;
 using MFMFMS.Application.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -129,6 +130,16 @@ namespace MFMFMS.API.Controllers
         public async Task<ActionResult<MonthlyExpendituresStatisticsDTO>> GetMonthlyStatistics([FromQuery] GetMonthlyExpendituresStatisticsQuery query)
         {
             return await _mediator.Send(query);
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<List<ExpenditureListDTO>>> Search([FromQuery] SearchExpendituresQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            HttpContext.InsertPaginationInformationInHeader(result.TotalAmountOfRecords);
+
+            return result.Items;
         }
     }
 }

@@ -18,5 +18,7 @@ namespace MFMFMS.Application.Contracts.Repositories
         Task<TotalExpendituresStatisticsDTO> GetTotalExpenditureStatistics();
         Task<MonthlyExpendituresStatisticsDTO> GetMonthlyExpenditureStatistics(int month, int year);
         Task<AnnualExpendituresStatisticsDTO> GetAnnualExpenditureStatistics(int year);
+
+        Task<(IEnumerable<Expenditure> Items, int TotalCount)> Search(string searchTerm, int page, int recordsPerPage);
     }
 }

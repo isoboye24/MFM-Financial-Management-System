@@ -5,10 +5,10 @@ using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureLists;
 using MFMFMS.Application.Features.Expenditures.Queries.GetExpenditureListsByMonthAndYear;
 using MFMFMS.Application.Features.Expenditures.Queries.GetMonthlyExpendituresStatistics;
 using MFMFMS.Application.Features.Expenditures.Queries.GetTotalExpenditureStatistics;
-using MFMFMS.Application.Features.Givings.Queries.GetMonthlyGivingStatistics;
 using MFMFMS.Domain.Entities;
 using MFMFMS.Persistence.Utilities;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace MFMFMS.Persistence.Repositories
 {
@@ -115,6 +115,56 @@ namespace MFMFMS.Persistence.Repositories
                                     .SumAsync(x => x.Amount);
 
             return amount == 0 ? new TotalExpendituresStatisticsDTO { TotalExpenditures = 0 } : new TotalExpendituresStatisticsDTO { TotalExpenditures = amount };
+        }
+
+        public async Task<(IEnumerable<Expenditure> Items, int TotalCount)> Search(string searchTerm, int page, int recordsPerPage)
+        {
+            if (page < 1)
+                throw new ArgumentOutOfRangeException(nameof(page));
+
+            if (recordsPerPage < 1)
+                throw new ArgumentOutOfRangeException(nameof(recordsPerPage));
+
+            var query = _db.Expenditures
+                .AsNoTracking()
+                .Where(x => !x.IsDeleted);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                searchTerm = searchTerm.Trim();
+                var year = 0;
+
+                var isAmount = decimal.TryParse(searchTerm, NumberStyles.Number, CultureInfo.CurrentCulture, out var amount);
+
+                var isYear = searchTerm.Length == 4 &&
+                             int.TryParse(searchTerm, out year) &&
+                             year >= 1 && year <= 9999;
+
+                var dateFormats = new[]
+                {
+            "yyyy-MM-dd",
+            "dd.MM.yyyy",
+            "d.M.yyyy",
+            "MM/dd/yyyy"
+        };
+
+                var isDate = DateTime.TryParseExact( searchTerm, dateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var date);
+
+                query = query.Where(x => x.Summary.Contains(searchTerm) || (isAmount && x.Amount == amount) || (isYear && x.Date.Year == year) ||
+                    (isDate && x.Date.Date == date.Date));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            // Retrieve only the requested page.
+            var items = await query
+                .OrderByDescending(x => x.Date)
+                .ThenByDescending(x => x.Id)
+                .Skip((page - 1) * recordsPerPage)
+                .Take(recordsPerPage)
+                .ToListAsync();
+
+            return (items, totalCount);
         }
     }
 }

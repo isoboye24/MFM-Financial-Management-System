@@ -63,7 +63,8 @@ namespace MFMFMS.Persistence.Repositories
 
         public async Task<int> GetTotalAmountOfRecords()
         {
-            return await _db.Set<T>().CountAsync();
+            return await _db.Set<T>()
+                            .CountAsync(x => !x.IsDeleted);
         }
 
         public Task Update(T entity)
@@ -74,7 +75,8 @@ namespace MFMFMS.Persistence.Repositories
 
         public async Task<int> GetTotalAmountOfRecordsById(Guid id)
         {
-            return await _db.Set<T>().CountAsync();
+            return await _db.Set<T>()
+                            .CountAsync(x => !x.IsDeleted && x.Id == id);
         }
     }
 }
